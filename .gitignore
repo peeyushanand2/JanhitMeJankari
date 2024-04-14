@@ -1,7 +1,15 @@
-﻿################################################################################
+################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-
 /Reactivities/.vs/
 /.vs/slnx.sqlite
+/Reactivities/.vs/Reactivities/FileContentIndex/df8b6365-46f0-49a0-9eff-2222bd48f64c.vsidx
+/Reactivities/Domain/bin/
+/Reactivities/Domain/obj/
+/Reactivities/Persistence/obj/
+/Reactivities/Persistence/bin/
+/Reactivities/Reactivities/bin/
+/Reactivities/Reactivities/obj/
+/Reactivities/Application/bin/
+/Reactivities/Application/obj/
