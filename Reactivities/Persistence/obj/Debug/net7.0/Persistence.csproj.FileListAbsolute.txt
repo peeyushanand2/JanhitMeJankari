@@ -1,0 +1,17 @@
+C:\Peeyush_Workspace\Reactivities\Persistence\bin\Debug\net7.0\Persistence.deps.json
+C:\Peeyush_Workspace\Reactivities\Persistence\bin\Debug\net7.0\Persistence.dll
+C:\Peeyush_Workspace\Reactivities\Persistence\bin\Debug\net7.0\Persistence.pdb
+C:\Peeyush_Workspace\Reactivities\Persistence\obj\Debug\net7.0\Persistence.csproj.AssemblyReference.cache
+C:\Peeyush_Workspace\Reactivities\Persistence\obj\Debug\net7.0\Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Peeyush_Workspace\Reactivities\Persistence\obj\Debug\net7.0\Persistence.AssemblyInfoInputs.cache
+C:\Peeyush_Workspace\Reactivities\Persistence\obj\Debug\net7.0\Persistence.AssemblyInfo.cs
+C:\Peeyush_Workspace\Reactivities\Persistence\obj\Debug\net7.0\Persistence.csproj.CoreCompileInputs.cache
+C:\Peeyush_Workspace\Reactivities\Persistence\obj\Debug\net7.0\Persistence.dll
+C:\Peeyush_Workspace\Reactivities\Persistence\obj\Debug\net7.0\refint\Persistence.dll
+C:\Peeyush_Workspace\Reactivities\Persistence\obj\Debug\net7.0\Persistence.pdb
+C:\Peeyush_Workspace\Reactivities\Persistence\obj\Debug\net7.0\ref\Persistence.dll
+C:\Peeyush_Workspace\Reactivities\Persistence\bin\Debug\net7.0\Domain.dll
+C:\Peeyush_Workspace\Reactivities\Persistence\bin\Debug\net7.0\Domain.pdb
+C:\Peeyush_Workspace\Reactivities\Persistence\obj\Debug\net7.0\Persistence.csproj.CopyComplete
+C:\Peeyush_Workspace\Reactivities\Persistence\bin\Debug\net7.0\Persistence.runtimeconfig.json
+C:\Peeyush_Workspace\Reactivities\Persistence\obj\Debug\net7.0\Persistence.genruntimeconfig.cache
