@@ -1,0 +1,1638 @@
+=======================================================
+file:///C:/Users/ab70356/Desktop/GokulKrishnan.pdf
+https://urldefense.com/v3/__https://www.interviewbit.com/angular-interview-questions/__;!!F_S_FTKmJFE!27UfLVmBsH60SPBa13433nRqSf4jYM375CxVoxf_bWdATxL6b7U5q1V0EzZgCQtMapB56U4uI0BvJl3yFsjokJUK82-W$ 
+https://urldefense.com/v3/__https://www.red-gate.com/simple-talk/sql/learn-sql-server/sql-server-interview-questions-for-experienced-developers/__;!!F_S_FTKmJFE!27UfLVmBsH60SPBa13433nRqSf4jYM375CxVoxf_bWdATxL6b7U5q1V0EzZgCQtMapB56U4uI0BvJl3yFsjokKHlkJQl$ 
+https://urldefense.com/v3/__https://www.edureka.co/blog/mvc-interview-questions__;!!F_S_FTKmJFE!27UfLVmBsH60SPBa13433nRqSf4jYM375CxVoxf_bWdATxL6b7U5q1V0EzZgCQtMapB56U4uI0BvJl3yFsjokH5cNALS$ 
+https://urldefense.com/v3/__https://www.interviewbit.com/web-api-interview-questions/__;!!F_S_FTKmJFE!27UfLVmBsH60SPBa13433nRqSf4jYM375CxVoxf_bWdATxL6b7U5q1V0EzZgCQtMapB56U4uI0BvJl3yFsjokK95TFpK$ 
+=======================================================
+
+SQL Server
+==========
+1> Can we write a distributed query and get some data which is located on other server and on Oracle Database ?
+Ans. SQL Server can be lined to any server provided it has an OLE-DB provider from Microsoft to allow a link.
+E.g. Oracle has a OLE-DB provider for oracle that Microsoft provides to add it as linked server to SQL Server group.
+
+2> Can we add an identity column to decimal datatype?
+Ans. YES, SQL Server support this
+
+3> What are the multiple ways to execute a dynamic query?
+Ans. EXEC sp_executesql, EXECUTE()
+
+4> By Mistake, Duplicate records exists in a table, how can we delete copy of a record ?
+Ans. 
+with T as
+(
+    select * , row_number() over (partition by Emp_ID order by Emp_ID) as rank
+    from employee
+)
+
+delete
+from T
+where rank > 1
+
+5> Write a Query to display employee details who is working in ECE department & who his having more than 3 years of exp?
+Ans. 
+SELECT *
+DATEDIFF(yy, doj, getdate()) AS ‘Exp’ 
+FROM employee 
+WHERE DATEDIFF(yy, doj, getdate())>3 AND dept_name=’ECE’
+
+Efficiently convert rows to columns in sql server?
+
+ In SQL Server you can use the PIVOT function to transform the data from rows to columns:
+ select Firstname, Amount, PostalCode, LastName, AccountNumber
+ from
+ (
+  select value, columnname
+  from yourtable
+ ) d
+ pivot
+ (
+  max(value)
+  for columnname in (Firstname, Amount, PostalCode, LastName, AccountNumber)
+ ) piv;
+
+6> What is the output of the program below? Explain.    
+
+delegate void Printer();
+static void Main()
+{​​​​​​​​
+        List<Printer> printers = new List<Printer>();
+        int i=0;
+        for(i; i < 10; i++)
+        {​​​​​​​​
+            printers.Add(delegate {​​​​​​​​ Console.WriteLine(i); }​​​​​​​​);
+        }​​​​​​​​
+        foreach (var printer in printers)
+        {​​​​​​​​
+            printer();
+        }​​​​​​​​
+}​​​​​​​​
+
+Answer:
+This program will output the number 10 ten times.
+Here’s why: The delegate is added in the for loop and “reference” (or perhaps “pointer” would be a better choice of words) to i is stored, 
+rather than the value itself. Therefore, after we exit the loop, 
+the variable i has been set to 10, so by the time each delegate is invoked, the value passed to all of them is 10.
+
+
+7> Refactor the code 
+
+class ClassA
+{
+  public ClassA() { }
+
+  public ClassA(int pValue) {  }
+}
+// client program
+class Program
+{
+  static void Main(string[] args)
+  {
+    ClassA refA = new ClassA();
+  }
+} 
+
+Is there a way to modify ClassA so that you can you call the constructor with parameters, 
+when the Main method is called, without creating any other new instances of the ClassA?
+
+Answer
+The this keyword is used to call other constructors, to initialize the class object. The following shows the implementation:
+
+class ClassA
+{
+  public ClassA() : this(10)
+  { }
+  public ClassA(int pValue)
+  {  }
+}
+
+8> 
+class Program    
+{    
+    static void Main(string[] args)    
+    {    
+        B bObj= new B(2);    
+        Console.ReadLine();    
+  
+    }    
+}    
+public class A    
+{    
+    public  A()    
+    {    
+        Console.WriteLine("Hi you are in class A");    
+    }    
+  
+    public A(int x)    
+    {    
+            
+    }    
+}    
+  
+public class B:A    
+{    
+    public B()    
+    {    
+        Console.WriteLine("Hi you are in class B");    
+    }    
+}
+
+Ans:
+A. It will throw a compilation error.
+B does not contain a constructor that takes 1 argument. If you want to make this program run, you must create a parameterized constructor for class B also.
+
+9> alert('5' + 5 + 5); Output : 555
+
+====================
+24/09/21 (Interview)
+====================
+
+1. How to set alternate table row color using CSS?
+col:first-child {background: #FF0}
+col:nth-child(2n+3) {background: #CCC}
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+          
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+          
+        tr:nth-child(even) {
+            background-color: Lightgreen;
+        }
+    </style>
+
+	You can also try this with pseudo selector
+	table tr:first-child{background-color: hotpink;}
+	table tr:nth-child(2){background-color: #ff0000;}
+	table tr:nth-child(3){background-color: blue;}
+ 
+2. Difference between var and dynamic in C#
+ 	var myvalue = 10; // statement 1
+	myvalue = “GeeksforGeeks”; // statement 2
+	Here the compiler will throw an error because the compiler has already decided the type of the myvalue variable using statement 1 that is an integer type. 
+	When you try to assign a string to myvalue variable, then the compiler will give an error because it violating safety rule type.
+
+	dynamic myvalue = 10; // statement 1
+	myvalue = “GeeksforGeeks”; // statement 2
+	Here, the compiler will not throw an error though the type of the myvalue is an integer. 
+	When you assign a string to myvalue it recreates the type of the myvalue and accepts string without any error.
+
+3. Private Constructors in C#
+	private constructors are used in class that contains only static members. 
+	The private constructor is always declared by using a private keyword.
+
+	It is the implementation of a singleton class pattern.
+	Use private constructor when class have only static members.
+	Using private constructor, prevents the creation of the instances of that class.
+	If a class contains only private constructor without parameter, then it prevents the automatic generation of default constructor.
+	If a class contains only private constructors and does not contain public constructor, 
+	then other classes are not allowed to create instances of that class except nested class.
+
+4. Abstract Class
+	Abstract Class can never be instantiated and is marked by the keyword abstract. An abstract class contains zero or more abstract methods in it. 
+	Abstract class acts as a base class and is designed to be inherited by subclasses that either implement or either override its method.
+
+5. Dll-Hell
+	Dll Hell refers to a set of problems caused when multiple applications attempt to share a common component like a dynamic link library (DLL).
+	The reason for this issue was that the version information about the different components of an application was not recorded by the system.
+	This problem of dynamic link library (.dll) is resolved through Versioning.
+	[assembly:Version(0.0.0.0)] ===> major version, minor version, revised version, new version
+	To see the parts of an assembly:
+
+	open cmd prompt of Visual studio and write - ILDASM
+	ILDASM: is a tool to see the content (metadata) of Assembly.
+
+6. Stack Vs Heap Memory - C#
+
+	Stack is used for static memory allocation and Heap for dynamic memory allocation, 
+	both stored in the computer's RAM.
+
+	Stack Memory:
+	It is an array of memory.
+	It is a LIFO (Last In First Out) data structure.
+	In it data can be added to and deleted only from the top of it.
+	
+	Heap Memory:
+	It is an area of memory where chunks are allocated to store certain kinds of data objects.
+	In it data can be stored and removed in any order.
+
+	When we declare a variable in a .NET application, it allocates some memory in the RAM. 
+	The memory which it allocates in RAM has three things are as follows:
+
+	Name of the variable,
+	The data type of the variable, and
+	Value of the variable.
+	
+	int i =101;
+	Value = 101, Name = i, Type = int
+	
+	Depending on the data type (i.e. depending on the value type and reference type ), 
+	the memory may be allocated either in the stack or in the heap memory.
+	
+	public void SomeMethod(){
+		int x = 101; // Statement 1
+		int y = 102; // Statement 2
+		SomeClass cls1 = new SomeClass(); // Statement 3
+	}
+	
+	When the 3rd statement is executed, it internally creates a pointer on the stack memory 
+	and the actual object is stored in a different memory location called Heap memory. 
+	The heap memory location does not track running memory.
+
+	Heap is used for dynamic memory allocation.
+	When the three statements are executed, then the control will exist from the method. 
+	When it passes the end control i.e. the end curly brace “}”, 
+	it will clear all the memory variables which are created on the stack. 
+	It will de-allocate the memory in ‘LIFO’ fashion from the stack.
+
+	It will not de-allocate the heap memory. Later, the heap memory will be de-allocated by the garbage collector.
+
+7. Garbage Collection
+
+	Garbage collection makes automatic memory management in .NET framework possible. 
+	The garbage collection consists of three phases:
+
+	In the marking phase, a list of all objects in use is created by following the references from all the root objects, 
+	i.e. variables on stack and static objects. Any allocated objects not on the list become candidates to be deleted from the heap. 
+	The objects on the list will be relocated in the compacting phase if necessary, to compact the heap and remove any unused memory between them.
+	In the relocation phase, all references to remaining objects are updated to point to the new location of objects to which they will be relocated 
+	in the next phase.
+	In the compacting phase, the heap finally gets compacted as all the objects that are not in use any more are released and the remaining objects 
+	are moved accordingly. The order of remaining objects in the heap stays intact.
+
+	To better handle different lifetimes of different objects, garbage collection introduces the concept of generations. 
+	A newly created object is placed in generation 0. If it is not released during a garbage collection run, it is moved to generation 1. 
+	If it is still not released when the next garbage collection run happens, it is moved to generation 2.
+	It stays there for the remainder of its lifetime.
+
+
+	There are two data types that the Garbage collector bifurcates into: Value types and Reference types
+
+ 1. Value types
+	In C#, all the "things" declared with the following list of type declarations are Value types (because they are from System.ValueType):
+
+	bool 	byte 	char 	decimal 	ushort 	ulong 
+	double 	enum 	float 	int 	uint 
+	long 	sbyte 	short 	struct 
+		
+	These Value Types reside on the stack. The CLR does not care about this type of data with reference to memory management.
+	The Stack is self-maintaining, meaning that it basically takes care of its own memory management.  When the top box is no longer used, it's thrown out.
+
+ 2. Reference Types
+	All the "things" declared with the types in this list are Reference types. They inherit from System.Object
+
+	class 	interface 	delegate 	object 	string
+
+	These Reference Types exist on a managed heap. This is where the Garbage Collector comes into the picture.
+
+	Managed Heap
+
+	A Managed Heap is a pool of memory where all the instances of Reference Types (classes and arrays etc.) are created and allocated space.
+	When an object is initialized, the CLR simply allocates an address space in the Managed Heap. 
+	There is actually no storage space allocated at this point of time. However a pointer to this heap is maintained to keep track of the next object within this heap. 
+	The memory space on this heap is allocated only when an object is created using the new operator.
+
+8> Multithreading:
+
+	It executes multiple process simultaneously.
+	Maximize the utilization of CPU resources.
+	Time sharing between multiple process.
+
+9> Sealed Class 
+
+	Sealed classes are used to restrict the inheritance feature of object oriented programming. Once a class is defined as a sealed class, 
+	this class cannot be inherited. 
+
+10> Protected Internal
+	Protected Internal variables/methods are accessible within the same assembly and also from the classes that are derived from this parent class.
+
+11> What’s the difference between an interface and abstract class?
+	Interfaces have all the methods having only declaration but no definition. In an abstract class, we can have some concrete methods.
+	In an interface class, all the methods are public. An abstract class may have private methods.
+
+12> What is the difference between Finalize() and Dispose() methods?
+	Dispose() is called when we want for an object to release any unmanaged resources with them. On the other hand, Finalize() is used for the same purpose, 
+	but it doesn’t assure the garbage collection of an object.
+
+13> Polymorphism
+	It allows you to create multiple methods with the same name but different signatures in the same class. The same name methods can also be in derived classes.
+	
+	There are two types of Polymorphism,
+	Method Overloading
+	Method Overriding
+
+	Method Overloading
+	Method Overloading is a type of polymorphism. It has several names like “Compile Time Polymorphism” or “Static Polymorphism” 
+	and sometimes it is called “Early Binding”.
+ 
+	Method Overloading means creating multiple methods in a class with same names but different signatures (Parameters). 
+	It permits a class, struct, or interface to declare multiple methods with the same name with unique signatures.
+
+	using System;  
+namespace DemoCsharp  
+{  
+    class Program  
+    {  
+        public int Add(int num1, int num2)  
+        {  
+            return (num1 + num2);  
+        }  
+        public int Add(int num1, int num2, int num3)  
+        {  
+            return (num1 + num2 + num3);  
+        }  
+        public float Add(float num1, float num2)  
+        {  
+            return (num1 + num2);  
+        }  
+        public string Add(string value1, string value2)  
+        {  
+            return (value1 + " " + value2);  
+        }  
+        static void Main(string[] args)  
+        {  
+            Program objProgram = new Program();  
+            Console.WriteLine("Add with two int parameter :" + objProgram.Add(3, 2));  
+            Console.WriteLine("Add with three int parameter :" + objProgram.Add(3, 2, 8));  
+            Console.WriteLine("Add with two float parameter :" + objProgram.Add(3 f, 22 f));  
+            Console.WriteLine("Add with two string parameter :" + objProgram.Add("hello", "world"));  
+            Console.ReadLine();  
+        }  
+    }  
+}
+
+	Method Overriding
+ 
+	Method Overriding is a type of polymorphism. It has several names like “Run Time Polymorphism” or “Dynamic Polymorphism” and sometime it is called “Late Binding”. 
+ 	Method Overriding means having two methods with same name and same signatures [parameters], one should be in the base class and other method should 
+	be in a derived class [child class]. You can override the functionality of a base class method to create a same name method with same signature in a 
+	derived class. You can achieve method overriding using inheritance. Virtual and Override keywords are used to achieve method overriding.
+
+	using System;  
+namespace DemoCsharp  
+{  
+    class BaseClass  
+    {  
+        public virtual int Add(int num1, int num2)  
+        {  
+            return (num1 + num2);  
+        }  
+    }  
+    class ChildClass: BaseClass  
+    {  
+        public override int Add(int num1, int num2)  
+        {  
+            if (num1 <= 0 || num2 <= 0)  
+            {  
+                Console.WriteLine("Values could not be less than zero or equals to zero");  
+                Console.WriteLine("Enter First value : ");  
+                num1 = Convert.ToInt32(Console.ReadLine());  
+                Console.WriteLine("Enter First value : ");  
+                num2 = Convert.ToInt32(Console.ReadLine());  
+            }  
+            return (num1 + num2);  
+        }  
+    }  
+    class Program  
+    {  
+        static void Main(string[] args)  
+        {  
+            BaseClass baseClassObj;  
+            baseClassObj = new BaseClass();  
+            Console.WriteLine("Base class method Add :" + baseClassObj.Add(-3, 8));  
+            baseClassObj = new ChildClass();  
+            Console.WriteLine("Child class method Add :" + baseClassObj.Add(-2, 2));  
+            Console.ReadLine();  
+        }  
+    }  
+} 
+
+14> What is a design pattern?
+
+	Design Pattern can be defined as
+	A solution to a problem which occurs very commonly in software design.
+	The Design Patterns are the best practices to find out the solutions for the complex known problems in the architectural or design challenges of the software designs.
+
+	Behavioural Pattern: 
+	The Behavioural Pattern is all about the communication between the several objects of the classes.
+	It mainly concentrates on the communication and invocation between the objects.
+
+	Creational Pattern: 
+	The Creational Pattern is about the instantiation of the class and also further extends to the object creation. 
+	This category can be further divided into Class creational patterns and object creational patterns.
+	The main theme used in this pattern is a delegation to get the work done. It mainly depends on the delegation model.
+	
+	Structural Pattern: 
+	The Structural Pattern is about the composition of the classes and objects while interacting with several other classes.
+	This ensures the application is more loosely coupled than getting complex.
+
+Singleton Design Pattern:
+	It comes under Creational design pattern.
+	It is a software pattern that prevents the creation of more than one instance of a class.
+	This pattern is useful when only one instance is required across the system to coordinate with actions.
+	
+	public class Singleton
+    	{
+        private static object _myLock = new object();
+        private static Singleton _singleton = null;
+
+        private Singleton() { }
+
+        public static Singleton Instance()
+        {
+            if (_singleton is null) // The first check
+            {
+                lock (_myLock)
+                {
+                    if (_singleton is null) // The second (double) check
+                    {
+                        _singleton = new Singleton();
+                    }
+                }
+            }
+            return _singleton;
+        	}
+    	}
+	
+	You can also use Lazy class to create a singleton design pattern in C# 4.0 or later, internally it uses double-checked locking by default.
+
+    	public class Singleton
+    	{
+        private static readonly Lazy _singleton = new Lazy(() => new Singleton());
+        private Singleton() { }
+        public static Singleton Instance => _singleton.Value;
+    	}
+
+=================Double checked locking approach for Thread-safe Singleton Design Pattern in C#.================
+ private constructor helps in preventing any external instantiations of objects and sealed will prevent the class inheritances.
+namespace SingletonDemo
+{
+    public sealed class Singleton
+    {
+        private static int counter = 0;
+        private static readonly object Instancelock = new object();
+        private Singleton()
+        {
+            counter++;
+            Console.WriteLine("Counter Value " + counter.ToString());
+        }
+        private static Singleton instance = null;
+       
+        public static Singleton GetInstance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (Instancelock)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new Singleton();
+                        }
+
+                    }
+                }
+                return instance;
+            }
+        }
+
+        public void PrintDetails(string message)
+        {
+            Console.WriteLine(message);
+        }
+    }
+}
+
+Factory design pattern:
+	The factory method design pattern abstract the process of object creation and allows the object to be created at run-time when it is required.
+	Factory method pattern falls under Creational Pattern of Gang of Four (GOF) Design Patterns in .Net
+
+	In Factory pattern, we create the object without exposing the creation logic. In this pattern, an interface is used for creating an object, 
+	but let subclass decide which class to instantiate. The creation of object is done when it is required. The Factory method allows a class later 
+	instantiation to subclasses.
+	
+	Product
+	This is an interface for creating the objects.
+
+	ConcreteProduct
+	This is a class which implements the Product interface.
+
+	Creator
+	This is an abstract class and declares the factory method, which returns an object of type Product.
+
+	ConcreteCreator
+	This is a class which implements the Creator class and overrides the factory method to return an instance of a ConcreteProduct.
+
+	interface Product {}
+
+	class ConcreteProductA : Product {}
+
+	class ConcreteProductB : Product {}
+
+	abstract class Creator
+	{
+	 public abstract Product FactoryMethod(string type);
+	}
+
+	class ConcreteCreator : Creator
+	{
+	 public override Product FactoryMethod(string type);
+ 	{
+ 	switch (type)
+ 		{
+		 case "A": return new ConcreteProductA();
+ 		 case "B": return new ConcreteProductB();
+ 		 default: throw new ArgumentException("Invalid type", "type");
+		 }
+ 	}
+	}
+
+	The main difference between a “factory method” and an “abstract factory” is that the factory method is a single method, and an abstract factory is an object.
+	The factory method is just a method, it can be overridden in a subclass, whereas the abstract factory is an object that has multiple factory methods on it.
+	The Factory Method pattern uses inheritance and relies on a subclass to handle the desired object instantiation.
+
+Abstract Factory Pattern:
+	Abstract Factory design pattern is one of the Creational pattern. Abstract Factory pattern is almost similar to Factory Pattern is considered as another layer 
+	of abstraction over factory pattern. Abstract Factory patterns work around a super-factory which creates other factories.
+	
+	AbstractFactory : Declares an interface for operations that create abstract product objects.
+	ConcreteFactory : Implements the operations declared in the AbstractFactory to create concrete product objects.
+	Product : Defines a product object to be created by the corresponding concrete factory and implements the AbstractProduct interface.
+	Client : Uses only interfaces declared by AbstractFactory and AbstractProduct classes.
+
+Dependency Injection Design Pattern:
+	The Dependency Injection Design Pattern in C# is a process in which we are injecting the object of a class into a class that depends on that object.
+	Dependency Injection pattern involves 3 types of classes:
+	Client Class: The Client class (dependent class) is a class that depends on the service class.
+	Service Class: The Service class (dependency) is a class that provides service to the client class.
+	Injector Class: The Injector class injects the service class object into the client class.
+
+	The injector class injects the dependency object into a class in three different ways. They are as follows.
+
+	Constructor Injection: When the Injector injects the dependency object (i.e. service) through the client class constructor,
+	then it is called Constructor Dependecy Injection.
+
+	Property Injection: When the Injector injects the dependency object (i.e. service) through the public property of the client class,
+	then it is called Property Dependency Injection. This is also called the Setter Injection.
+
+	Method Injection: When the Injector injects the dependency object (i.e. service) through a public method of the client class, 
+	then it is called Method Dependency Injection. In this case, the client class implements an interface that declares the method(s) 
+	to supply the dependency object and the injector uses this interface to supply the dependency object (i.e. service) to the client class.
+
+	
+What is Media-Type Formatter in ASP.NET Web API?
+
+	Media-Type formatter is an abstract class from which JsonMediaTypeFormatter (handle JSON format) and XmlMediaTypeFormatter (handle XML format) class derived from.
+	Media-Type formatter are classes responsible for serializing the response data in the format that the client asked for.
+
+Which of the following Open-source libraries is used by WEB API for JSON serialization?
+
+	Json.NET library is generally used by Web API for JSON serialization.
+
+Why Bootstrap?
+
+	Bootstrap is flexible and easy to work with. Its main advantages are that it is responsive by design, it maintains wide browser compatibility, 
+	it offers consistent design by using re-usable components, and it is very easy to use and quick to learn.
+
+Difference between First() and FirstOrDefault()?
+	FirstOrDefault() returns the default value (null) if there is no result data but First() will throw an exception if there is no result data.
+
+What are the selectors in jQuery? How many types of selectors in jQuery?
+	In order to work with any element on the web page, we would first need to find it. Selectors find the HTML elements in jQuery. 
+	Some of the most commonly used and basic selectors are:
+
+	Name: Used to select all elements which matches the given element Name.
+	#ID: Used to select a single element which matches with the given ID
+	.Class: Used to select all elements which match with the given Class.
+	Universal (*): Used to select all elements available in a DOM.
+	Multiple Elements E, F, G: Used to selects the combined results of all the specified selectors E, F or G.
+	Attribute Selector: Used to select elements based on its attribute value.
+
+How to perform jQuery AJAX requests?
+	jQuery provides the ajax() method to perform an AJAX (asynchronous HTTP) request.
+	Syntax: $.ajax({name:value, name:value, ... }). The parameters specify one or more value of name-value pairs.
+
+	url : this name specifies the URL to send the request to. Default is the current page.
+	success(result,status,xhr) : success callback function which runs when the request succeeds
+	error(xhr,status,error) : A function to run if the request fails.
+	async : Boolean value that indicates whether the request should be handled asynchronous or not. Default value is true.
+	complete(xhr,status) : A function to run when the request is completed (after success and error functions are handled)
+	xhr : A function used for creating the XMLHttpRequest object
+
+	$.ajax({
+  	url: "resourceURL", 
+  	async: false, 
+  	success: function(result){
+    	$("div").html(result);
+  	},  
+  	error: function(xhr){
+    	alert("An error occured: " + xhr.status + " " + xhr.statusText);
+  	}
+	});
+
+Parameter Sniffing?
+
+	SQL Server tries always to generate the most optimized execution plan for each stored procedure the first time that the stored procedure is executed. 
+	The SQL Server Engine looks at the stored procedure passed parameter values when compiling the stored procedure, the first execution, 
+	in order to create the optimal plan including the parameters and keep that plan for future use in the plan cache. This parameter analysis process is called 
+	the Parameter Sniffing.
+
+Shadowing?
+
+	Shadowing is also known as method hiding. The method of the parent class is available to the child class without using the override keyword in shadowing. 
+	The child class has its own version of the same function.
+	Use the new keyword to perform shadowing and to create the own version of the base class function.
+	
+	using System;
+	using System.Collections.Generic;
+
+	class Demo {
+   	public class Parent {
+      		public string Display() {
+         	return "Parent Class!";
+      		}
+   	}
+   
+  	public class Child : Parent {
+      		public new string Display() {
+         	return "Child Class!";
+      		}
+   	}
+
+   	static void Main(String[] args) {
+      		Child child = new Child();
+      		Console.WriteLine(child.Display());
+   	}
+	}
+
+How to handle errors in Web API?
+
+	Microsoft’s ASP.NET Web API is a lightweight framework you can use to build stateless RESTful services that run on HTTP. 
+	Exceptions are errors that occur at runtime, and exception handling is the technique of handling runtime errors in your application code.
+	
+	We can use the HttpResponseException class to return specific HTTP status codes and messages from your controller methods in Web API.
+	public Employee GetEmployee(int id)
+	{
+    	Employee emp = employeeRepository.Get(id);
+    	if (emp == null)
+    	{
+        var response = new HttpResponseMessage(HttpStatusCode.NotFound)
+        {
+            Content = new StringContent("Employee doesn't exist", System.Text.Encoding.UTF8, "text/plain"),
+            StatusCode = HttpStatusCode.NotFound
+        }
+        throw new HttpResponseException(response);
+    	}
+    	return emp;
+	}
+	
+	If your Web API returns IHttpActionResult, you might want to write the GetEmployee method as shown below.
+	
+	public IHttpActionResult GetEmployee(int id)
+	{
+    	Employee emp = employeeRepository.Get(id);
+    	if (emp == null)
+    	{
+        var response = new HttpResponseMessage(HttpStatusCode.NotFound)
+        {
+            Content = new StringContent("Employee doesn't exist", System.Text.Encoding.UTF8, "text/plain"),
+            StatusCode = HttpStatusCode.NotFound
+        }
+        throw new HttpResponseException(response);
+    	}
+    	return Ok(emp);
+	}
+
+	Using HttpError in ASP.NET Web API
+
+	You can use the CreateErrorResponse extension method in your Web API controller method to return meaningful error codes and error messages. 
+	Note that the CreateErrorResponse method creates an HttpError object and then wraps it inside an HttpResponseMessage object.	
+
+	public IActionResult GetEmployee(int id)
+	{
+    	Employee emp = employeeRepository.Get(id);
+    	if (emp == null)
+    	{
+       	string message = "Employee doesn't exist";
+        throw new HttpResponseException(
+            Request.CreateErrorResponse(HttpStatusCode.NotFound, message));
+    	}
+    	return Ok(emp);
+	}
+	
+	Using exception filters in ASP.NET Web API
+
+	To create an exception filter, you need to implement the IExceptionFilter interface. You can also create exception filters by extending the 
+	abstract class ExceptionFilterAttribute and then overriding the OnException method. Note that the ExceptionFilterAttribute abstract class in turn implements 
+	the IExceptionFilter interface.	
+	
+	public class CustomExceptionFilter : ExceptionFilterAttribute
+    {
+        public override void OnException(HttpActionExecutedContext actionExecutedContext)
+        {
+            HttpStatusCode status = HttpStatusCode.InternalServerError;
+            String message = String.Empty;
+            var exceptionType = actionExecutedContext.Exception.GetType();
+            if (exceptionType == typeof(UnauthorizedAccessException))
+            {
+                message = "Access to the Web API is not authorized.";
+                status = HttpStatusCode.Unauthorized;
+            }
+            else if (exceptionType == typeof(DivideByZeroException))
+            {
+                message = "Internal Server Error.";
+                status = HttpStatusCode.InternalServerError;
+            }
+            else
+            {
+                message = "Not found.";
+                status = HttpStatusCode.NotFound;
+            }
+            actionExecutedContext.Response = new HttpResponseMessage()
+            {
+                Content = new StringContent(message, System.Text.Encoding.UTF8, "text/plain"),
+                StatusCode = status
+            };
+            base.OnException(actionExecutedContext);
+        }
+    }
+
+	You should add the custom exception filter to the filters collection of the HttpConfiguration object.
+	public static void Register(HttpConfiguration config)
+        {
+            config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Filters.Add(new CustomExceptionFilter());
+        }
+
+	Using Exception Handlers
+
+	Normally, exception filter is used to catch the unhandled exception. This approach will work fine but it fails if any error is raised from outside action. 
+	For example, if any error is raised in the following area then exception filter will not work.
+
+	Error inside the exception filter.
+	Exception related to routing.
+	Error inside the Message Handlers class.
+	Error in Controller Constructor.
+	Web API 2 provides a good alternative way to achieve global exception handling. Web API provides "ExceptionHandler" abstract class to handle exception 
+	above said area.
+
+	Same as exception filter, Exception handler is also required to be registered. ExceptionHandler is inheriting from IExceptionHandler interface 
+	and Web API has already this type of class registered so we just need to replace this class to our custom exception handler class 
+	because Web API doesn’t support multiple ExceptionHandler.
+
+	public static class WebApiConfig
+	{
+    		public static void Register(HttpConfigurationconfig)
+    		{
+        		config.Filters.Add(new CustomExceptionFilter());
+        		config.Services.Replace(typeof(IExceptionHandler), newGlobalExceptionHandler());
+    		}
+	}
+
+	We can register your exception filters in one of the following three ways:
+
+	(1) At the action level
+	(2) At the controller level
+	(3) Globally
+
+	The following code snippet shows how you can apply a filter at the action level, i.e., to your controller action method.
+	public class EmployeesController : ApiController
+	{
+    	[NotImplementedExceptionFilter]
+    	public Employee GetEmployee(int id)
+    	{
+        throw new NotImplementedException();
+    	}
+	}
+
+	To apply the exception filter at the controller level, you would need to use the filter attribute at the class level as shown below.
+	[DatabaseExceptionFilter]
+	public class EmployeesController : ApiController
+	{
+    	//Some code
+	}
+
+	We can also apply your custom exception filter globally so that it works for all of the Web API controllers. Here is how you can do this.
+
+	GlobalConfiguration.Configuration.Filters.Add(new DatabaseExceptionFilterAttribute());
+
+	The following code snippet illustrates how you can apply the custom exception filter we created earlier to your controller method.
+
+	[CustomExceptionFilter]
+ 	public IEnumerable<string> Get()
+ 	{
+    	throw new DivideByZeroException(); 
+ 	}
+	
+	IMP:
+	Web API supports many ways of exception handling. Following is a summary of exception handling in Web API described in this article:
+
+	We can use HttpResponseException when the possibility of exception is known by us. In the above example, we have thrown exception 
+	using HttpResponseException class as we know there is a chance to employee not found in the database.
+ 
+	We can use exception filter to catch unhandled exceptions on action/controllers.
+ 
+	We can use Exception Handlers to catch any type of unhandled exception application-wide.
+
+
+What is the use of HttpResponseMessage?
+
+	It is used to set response values such as header and status control. It simply allows us to work with HTTP protocol. 
+	It represents HTTP response messages that encapsulate data and status code.
+
+	// GetEmployee action 
+	public HttpResponseMessage GetEmployee(int id) 
+	{     
+     	Employee emp = EmployeeContext.Employees.Where(e => e.Id == id).FirstOrDefault(); 
+	     if (emp != null) 
+	      { 
+        	       return Request.CreateResponse<Employee>(HttpStatusCode.OK, emp);     
+	      }     else     
+	      { 	
+        	       return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Employee Not Found"); 
+	      } 
+	}
+
+	
+IEnumerable vs IQueryable?
+
+	IEnumerable and IQueryable are used for data manipulation in LINQ from the database and collections.
+	IEnumerable exists in the System.Collections namespace.
+	IEnumerable is suitable for querying data from in-memory collections like List, Array and so on.
+	While querying data from the database, IEnumerable executes "select query" on the server-side, loads data in-memory on the client-side and then filters the data.
+	IEnumerable is beneficial for LINQ to Object and LINQ to XML queries.
+	IEnumerable doesn’t support lazy loading
+
+	IQueryable exists in the System.Linq Namespace.
+	IQueryable is suitable for querying data from out-memory (like remote database, service) collections.
+	While querying data from a database, IQueryable executes a "select query" on server-side with all filters.
+	IQueryable is beneficial for LINQ to SQL queries.
+	IQueryable support lazy loading.
+
+Kestrel web server in ASP.NET Core ?
+	
+	Kestrel is a cross-platform web server for ASP.NET Core. Kestrel is the web server that's included and enabled by default in ASP.NET Core project templates.
+	ASP.NET Core project templates use Kestrel by default. In Program.cs, the ConfigureWebHostDefaults method calls UseKestrel
+	
+	public static void Main(string[] args)
+	{
+    		CreateHostBuilder(args).Build().Run();
+	}
+
+	public static IHostBuilder CreateHostBuilder(string[] args) =>
+    		Host.CreateDefaultBuilder(args)
+        	.ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.UseStartup<Startup>();
+        });
+
+	OR
+
+	public class Program
+	{
+	public static void Main(string[] args)
+	{
+   	 var host = new WebHostBuilder()
+        .UseKestrel()
+        .UseContentRoot(Directory.GetCurrentDirectory())
+        .UseIISIntegration()
+        .UseStartup<Startup>()
+        .UseApplicationInsights()
+        .Build();
+
+    	host.Run();
+	}
+	}
+
+Abstract Factory Design Pattern ?
+
+	Abstract Factory patterns act a super-factory which creates other factories. This pattern is also called a Factory of factories. 
+	In Abstract Factory pattern an interface is responsible for creating a set of related objects, or dependent objects without specifying their concrete classes.
+
+	Internally, Abstract Factory use Factory design pattern for creating objects. But it can also use Builder design pattern and prototype design pattern 
+	for creating objects. It completely depends upon your implementation for creating objects.
+
+	AbstractFactory - This is an interface which is used to create abstract product
+	ConcreteFactory - This is a class which implements the AbstractFactory interface to create concrete products.
+	AbstractProduct - This is an interface which declares a type of product.
+	ConcreteProduct - This is a class which implements the AbstractProduct interface to create a product.
+	Client - This is a class which uses AbstractFactory and AbstractProduct interfaces to create a family of related objects.
+
+	public interface AbstractFactory
+	{
+ 	AbstractProductA CreateProductA();
+ 
+ 	AbstractProductB CreateProductB();
+	}
+ 
+	public class ConcreteFactoryA : AbstractFactory
+	{
+ 	public AbstractProductA CreateProductA()
+ 	{
+ 	return new ProductA1();
+ 	}
+ 
+ 	public AbstractProductB CreateProductB()
+ 	{
+ 	return new ProductB1();
+ 	}
+	}
+ 
+	public class ConcreteFactoryB : AbstractFactory
+	{
+ 	public AbstractProductA CreateProductA()
+ 	{
+ 	return new ProductA2();
+ 	}
+ 
+ 	public AbstractProductB CreateProductB()
+ 	{
+ 	return new ProductB2();
+ 	}
+	}
+ 
+	public interface AbstractProductA { }
+ 
+	public class ProductA1 : AbstractProductA { }
+ 
+	public class ProductA2 : AbstractProductA { }
+ 
+	public interface AbstractProductB { }
+ 
+	public class ProductB1 : AbstractProductB { }
+	 
+	public class ProductB2 : AbstractProductB { }
+
+	public class Client
+	{
+	 private AbstractProductA _productA;
+ 	private AbstractProductB _productB;
+ 
+ 	public Client(AbstractFactory factory)
+ 	{
+ 	_productA = factory.CreateProductA();
+ 	_productB = factory.CreateProductB();
+ 	}
+	}
+
+	VehicleFactory - AbstractFactory interface
+	HondaFactory & HeroFactory- Concrete Factories
+	Bike & Scooter - AbstractProduct interface
+	Regular Bike, Sports Bike, Regular Scooter & Scooty - Concrete Products
+	VehicleClient - Client
+
+	interface VehicleFactory
+	{
+ 	Bike GetBike(string Bike);
+ 	Scooter GetScooter(string Scooter);
+	}
+	
+	class HondaFactory : VehicleFactory
+	{
+ 	public Bike GetBike(string Bike)
+ 	{
+ 	switch (Bike)
+ 	{
+	 case "Sports":
+ 	return new SportsBike();
+	 case "Regular":
+ 	return new RegularBike();
+ 	default:
+	 throw new ApplicationException(string.Format("Vehicle '{0}' cannot be created", Bike));
+	 }
+ 	}
+
+	 public Scooter GetScooter(string Scooter)
+ 	{
+ 	switch (Scooter)
+ 	{
+ 	case "Sports":
+ 	return new Scooty();
+ 	case "Regular":
+ 	return new RegularScooter();
+ 	default:
+ 	throw new ApplicationException(string.Format("Vehicle '{0}' cannot be created", Scooter));
+ 	  }
+	 }
+	}
+
+	class HeroFactory : VehicleFactory
+	{
+ 	public Bike GetBike(string Bike)
+ 	{
+ 	switch (Bike)
+ 	{
+ 	case "Sports":
+ 	return new SportsBike();
+ 	case "Regular":
+ 	return new RegularBike();
+ 	default:
+ 	throw new ApplicationException(string.Format("Vehicle '{0}' cannot be created", Bike));
+ 	 }
+	}
+
+ 	public Scooter GetScooter(string Scooter)
+ 	{
+ 	switch (Scooter)
+ 	{
+	 case "Sports":
+	 return new Scooty();
+	 case "Regular":
+	 return new RegularScooter();
+	 default:
+	 throw new ApplicationException(string.Format("Vehicle '{0}' cannot be created", Scooter));
+	  }
+	 }
+   	}
+
+	interface Bike
+ 	{
+ 	string Name();
+	}
+
+	interface Scooter
+	{
+ 	string Name();
+	}
+
+	class RegularBike : Bike
+	{
+ 	public string Name()
+ 	{
+ 	return "Regular Bike- Name";
+ 	}
+	}
+
+	class SportsBike : Bike
+	{
+ 	public string Name()
+ 	{
+ 	return "Sports Bike- Name";
+ 	}
+	}
+
+	class RegularScooter : Scooter
+	{
+ 	public string Name()
+ 	{
+ 	return "Regular Scooter- Name";
+ 	}
+	}
+
+	class Scooty : Scooter
+	{
+ 	public string Name()
+ 	{
+ 	return "Scooty- Name";
+ 	}
+	}
+
+	class Program
+	{
+ 	static void Main(string[] args)
+ 	{
+ 	VehicleFactory honda = new HondaFactory();
+	 VehicleClient hondaclient = new VehicleClient(honda, "Regular");
+ 
+ 	 Console.WriteLine("******* Honda **********");
+	 Console.WriteLine(hondaclient.GetBikeName());
+	 Console.WriteLine(hondaclient.GetScooterName());
+ 
+ 	hondaclient = new VehicleClient(honda, "Sports");
+ 	Console.WriteLine(hondaclient.GetBikeName());
+ 	Console.WriteLine(hondaclient.GetScooterName());
+ 
+ 	VehicleFactory hero = new HeroFactory();
+ 	VehicleClient heroclient = new VehicleClient(hero, "Regular");
+ 
+ 	Console.WriteLine("******* Hero **********");
+ 	Console.WriteLine(heroclient.GetBikeName());
+ 	Console.WriteLine(heroclient.GetScooterName());
+
+	heroclient = new VehicleClient(hero, "Sports");
+ 	Console.WriteLine(heroclient.GetBikeName());
+ 	Console.WriteLine(heroclient.GetScooterName()); 
+ 	Console.ReadKey();
+ 	 }
+	}
+
+How to reverse a string?
+
+	public string Reverse(string text)
+	{
+    	char[] cArray = text.ToCharArray();
+	string reverse = string.Empty;
+    	for (int i = cArray.Length - 1; i > -1; i--)
+    	{
+         reverse += cArray[i];
+    	}
+    	 return reverse;
+	}
+
+GET OR POST, which is more secure?
+
+	GET is less secure than POST because sent data is part of the URL. POST is a little safer than GET because the parameters are stored neither in the browser 
+	history nor in the web server logs.
+
+HTTP Methods/verbs for RESTful Services?
+
+	The primary or most-commonly-used HTTP verbs (or methods, as they are properly called) are POST, GET, PUT, PATCH, and DELETE. These correspond to create, 
+	read, update, and delete (or CRUD) operations, respectively. There are a number of other verbs, too, but are utilized less frequently. Of those less-frequent 
+	methods, OPTIONS and HEAD are used more often than others.
+
+	HTTP Verb	CRUD		 Entire Collection (e.g. /customers)
+	
+	POST		Create		 201 (Created), 'Location' header with link to /customers/{id} containing new ID.
+	GET		Read		 200 (OK), list of customers. Use pagination, sorting and filtering to navigate big lists.
+	PUT		Update/Replace	 405 (Method Not Allowed), unless you want to update/replace every resource in the entire collection.
+	PATCH		Update/Modify  	 405 (Method Not Allowed), unless you want to modify the collection itself.
+	DELETE		Delete 		 405 (Method Not Allowed), unless you want to delete the whole collection—not often desirable.
+
+Difference between the PUT and PATCH method?
+	
+	In a PUT request, the enclosed entity is considered to be a modified version of the resource stored on the origin server, and the client is requesting 
+	that the stored version be replaced.
+
+	With PATCH, however, the enclosed entity contains a set of instructions describing how a resource currently residing on the origin server should be 
+	modified to produce a new version.
+
+	when we want to update a resource with PUT request, you have to send the full payload as the request whereas with PATCH, 
+	we only need to send the parameters which you want to update.
+	
+	PATCH request requires less bandwidth.
+
+ASP.NET MVC- Filters?
+
+	Filter Type		Interface		Description
+
+	Authentication		IAuthenticationFilter	Authentication filter runs before any other filter or action method. It confirms that you are a valid or invalid user. 
+	Authorization		IAuthorizationFilter	Authorization Filters are responsible for checking User Access. The AuthorizeAttribute and RequireHttpsAttribute are examples of Authorization Filters.
+	Action			IActionFilter		It has two methods OnActionExecuting and OnActionExecuted. OnActionExecuting runs before the Action and gives an opportunity to cancel the Action call.
+	Result			IResultFilter		Runs before and after the action result are executed. The OutputCacheAttribute class is an example of Result Filters. 
+	Exception		IExceptionFilter	Runs only if another filter, the action method, or the action result throws an exception. The HandleErrorAttribute class is an example of ExceptionFilters.
+
+C# program to find maximum and minimum element in an integer array?
+
+	public static void Main() {
+      	int[] arr = new int[5] {99, 95, 93, 89, 87};
+      	int i, max, min, n;
+      	// size of the array
+      	n = 5;
+      	max = arr[0];
+      	min = arr[0];
+      	for(i=1; i<n; i++) {
+         if(arr[i] > max) {
+            max = arr[i];
+         }
+         if(arr[i] < min) {
+            min = arr[i];
+         }
+      	}
+      	Console.Write("Maximum element = {0}\n", max);
+      	Console.Write("Minimum element = {0}\n\n", min);
+   	}
+
+Fibonacci Series?
+	
+	public static void Fibonacci_Iterative(int len){
+	  int a = 0, b = 1, c = 0;
+	  Console.Write("{0} {1}", a,b); 
+	  for (int i = 2; i < len; i++)  
+    	  { 
+		c= a + b;  
+        	Console.Write("{0}", c);
+		a= b;  
+        	b= c; 
+	  }
+	}
+
+Usage and Importance of Using in C#?
+
+	There are two ways to use the using in C#. One is as a directive and the other is as a statement.
+	A. To allow the normal use of types in a namespace
+		using System.IO;  
+		using System.Text;
+
+	B. To create an alias for a namespace or a type. This is called a using alias directive.
+		using MyProject = TruckingApp.Services;
+		MyProject.Truck newObj = new MyProject.Truck();
+
+	C. The using statement ensures that Dispose() is called even if an exception occurs when you are creating objects and calling methods, properties and so on.
+	   if I am doing some database operation (Insert, Update, Delete) but somehow an exception occurs, then here the using statement closes the connection automatically. 
+	   how to implement the using statement in ADO.NET, calling WebService, IO operations, EntityFramework and so on.
+	   
+	ADO.NET
+	   using (SqlConnection conn = new SqlConnection(connString))  
+		{ }
+
+	Entity Framework
+	   The using statement can also be used in EntityFramework and Transaction.
+	   using (TransactionScope trans = new TransactionScope())  
+            {  
+                  // Creating entity framework connection object through Using statement  
+                  using (TruckingDBEntities cc = new TruckingDBEntities ())  
+                  {  }
+	    }
+
+	Web Service
+	   // Calling Webserice with username and password  
+	   using (TruckServiceClient sc = new TruckServiceClient())  
+	   {}
+
+	IO operations
+	   The using statement can also be used when we do any kind of IO operations. It also helps to dispose of IO objects.
+	    using (StreamWriter sw = File.AppendText(filePath))  
+      		{  sw.WriteLine(message);  }
+
+        Lastly we can implement the using statement in custom classes like:
+	Using(Employee emp = new Employee())  
+	{  emp.getEmp();  } 
+
+C# - Tuple?
+
+	A tuple is a data structure that contains a sequence of elements of different data types. It can be used where you want to have a data structure 
+	to hold an object with properties, but you don't want to create a separate type for it.
+
+	var person = Tuple.Create(1, "Steve", "Jobs");
+	var numbers = Tuple.Create(1, 2, 3, 4, 5, 6, 7, 8); //A tuple can only include a maximum of eight elements
+	////Generally, the 8th position is for the nested tuple, which you can access using the Rest property.
+	var numbers = Tuple.Create(1, 2, 3, 4, 5, 6, 7, Tuple.Create(8, 9, 10, 11, 12, 13));
+	numbers.Item1; // returns 1
+	numbers.Item7; // returns 7
+	numbers.Rest.Item1; //returns (8, 9, 10, 11, 12, 13)
+	numbers.Rest.Item1.Item1; //returns 8
+	numbers.Rest.Item1.Item2; //returns 9
+	
+	Usage of Tuple:
+	When you want to return multiple values from a method without using ref or out parameters.
+	When you want to pass multiple values to a method through a single parameter.
+	When you want to hold a database record or some values temporarily without creating a separate class.
+
+	Tuple Limitations:
+	The Tuple is a reference type and not a value type. It allocates on heap and could result in CPU intensive operations.
+	The Tuple is limited to include eight elements. You need to use nested tuples if you need to store more elements. However, this may result in ambiguity.
+	The Tuple elements can be accessed using properties with a name pattern Item<elementNumber>, which does not make sense.
+
+How To Find Second Highest Salary Using a Sub-Query?
+
+	SELECT TOP 1 SALARY  
+	FROM (  
+      	SELECT DISTINCT TOP 2 SALARY  
+      	FROM tbl_Employees  
+      	ORDER BY SALARY DESC  
+      	) RESULT  
+	ORDER BY SALARY 
+	----------------
+	WITH RESULT AS  
+	(  
+    	SELECT SALARY,  
+           DENSE_RANK() OVER (ORDER BY SALARY DESC) AS DENSERANK  
+    	FROM tbl_Employees  
+	)
+  
+	SELECT TOP 1 SALARY  
+	FROM RESULT  
+	WHERE DENSERANK = 2  
+
+IEnumerable vs ICollection vs IList vs IQueryable in C#?
+	
+	Namespace: System.Collections
+	An IEnumerable is a list or a container which can hold some items. You can iterate through each element in the IEnumerable. 
+	You can not edit the items like adding, deleting, updating, etc. instead you just use a container to contain a list of items. 
+	It is the most basic type of list container.
+	
+	ICollection is another type of collection, which derives from IEnumerable and extends it’s functionality to add, remove, update element in the list. 
+	ICollection also holds the count of elements in it and we does not need to iterate over all elements to get total number of elements.
+
+	IList extends ICollection. An IList can perform all operations combined from IEnumerable and ICollection, and some more operations like inserting 
+	or removing an element in the middle of a list.
+
+	Namespace: System.Linq
+	IQueryable extends ICollection. An IQueryable generates a LINQ to SQL expression that is executed over the database layer. Instead of the generating 
+	a Func<T, bool> like the ones above, IQueryable generates an expression tree and gives Expression<Func<T, bool>> that is executed over the database layer 
+	to get data set.
+
+	IEnumerable vs IEnumerator
+	If we want to iterate through the list (or any collection) at one time, then IEnumerable is the best choice, 
+	but if we want to preserve the state of an iteration variable, then we should go with IEnumerator.
+
+	The difference between IEnumerable and IEnumerator is IEnumerable works for the generic interface, and IEnumerator works for all non-generic interfaces.
+	IEnumerable internally implements the GetEnumerator() function of IEnumerator.
+	IEnumerator has two methods MoveNext and Reset. It also has a property called Current.
+
+ExecuteReader, ExecuteNonQuery and Executescalar in ADO.Net?
+
+	ExecuteNonQuery method is used to execute SQL Command or the storeprocedure performs, INSERT, UPDATE or Delete operations. 
+	It doesn't return any data from the database. Instead, it returns an integer specifying the number of rows inserted, updated or deleted.
+
+	ExecuteReader method is used to execute a SQL Command or storedprocedure returns a set of rows from the database.
+
+	ExecuteScalar method is used to execute SQL Commands or storeprocedure, after executing return a single value from the database. 
+	It also returns the first column of the first row in the result set from a database.
+	
+
+Difference Between dispose() and finalize() in C#?
+
+	Methods dispose() and finalize() are the methods of C# which are invoked to free the unmanaged resources held by an object.
+	The dispose() method is defined inside the interface IDisposable whereas, the method finalize() is defined inside the class object.
+	The main difference between dispose() and finalize() is that the method dispose() has to be explicitly invoked by the user whereas, 
+	the method finalize() is invoked by the garbage collector, just before the object is destroyed.
+
+	Garbage collector frees the managed resources automatically but if you want to free the unmanaged resources like file handle, data connection, etc., 
+	the finalize method has to be implemented manually. The garbage collector invokes the method finalize() just before it destroys the object completely.
+
+	The finalize() method affects the cost of the performance as it does not free the memory instantly. In C# the finalize method is called automatically with destructors.
+
+SOLID Principles?
+
+	In Object Oriented Programming (OOP), SOLID is an acronym, introduced by Michael Feathers, for five design principles used to make software design 
+	more understandable, flexible, and maintainable.
+
+	There are five SOLID principles:
+
+	Single Responsibility Principle (SRP)
+	Open Closed Principle (OCP)
+	Liskov Substitution Principle (LSP)
+	Interface Segregation Principle (ISP)
+	Dependency Inversion Principle (DIP)
+
+	Single Responsibility Principle (SRP):
+	Definition: A class should have only one reason to change.
+	If a class has only a single responsibility, it is likely to be very robust. It’s easy to verify its working as per logic defined. 
+	And it’s easy to change in class as it has single responsibility.
+
+	Open Closed Principle (OCP):
+	Definition: Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.
+	We can apply OCP by using interface, abstract class, abstract methods and virtual methods when you want to extend functionality.
+	
+	Liskov Substitution Principle (LSP):
+	Definition: Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.
+	LSP is a fundamental principle of SOLID Principles and states that if program or module is using base class then derived class should be 
+	able to extend their base class without changing their original implementation.
+
+	Interface Segregation Principle (ISP):
+	Definition: No client should be forced to implement methods which it does not use, and the contracts should be broken down to thin ones.
+	Interface segregation principle is required to solve the design problem of the application. When all the tasks are done by a single class or in other words, 
+	one class is used in almost all the application classes then it has become a fat class with overburden. Inheriting such class will results in having 
+	sharing methods which are not relevant to derived classes but its there in the base class so that will inherit in the derived class.
+	Using ISP, we can create separate interfaces for each operation or requirement rather than having a single class to do the same work.
+	
+	Dependency Inversion Principle (DIP):
+	This principle is about dependencies among components. The definition of DIP is given by Robert C. Martin is as follows:
+
+	High-level modules should not depend on low-level modules. Both should depend on abstractions.
+	Abstractions should not depend on details. Details should depend on abstractions.
+
+	The principle says that there should not be a tight coupling among components of software and to avoid that, the components should depend on abstraction.
+
+	Inversion of Control (IoC) is a technique to implement the Dependency Inversion Principle in C#. Inversion of control can be implemented using either 
+	an abstract class or interface. 
+	
+	public interface IAutomobile
+	{
+ 	void Ignition();
+ 	void Stop();
+	}
+
+	public class Jeep : IAutomobile
+	{
+	 public void Ignition()
+ 	 {
+	  Console.WriteLine("Jeep start");
+ 	 }
+	 public void Stop()
+ 	 {
+ 	 Console.WriteLine("Jeep stopped.");
+  	 }
+	}
+
+	public class SUV : IAutomobile
+	{
+	 public void Ignition()
+ 	 {
+ 	 Console.WriteLine("SUV start");
+ 	 }
+	  public void Stop()
+ 	 {
+	  Console.WriteLine("SUV stopped.");
+ 	 }
+	}
+
+	public class AutomobileController
+	{
+ 	 IAutomobile m_Automobile;
+ 
+ 	 public AutomobileController(IAutomobile automobile)
+ 	 {
+  	  this.m_Automobile = automobile;
+ 	 }
+ 
+ 	public void Ignition()
+ 	{
+ 	 m_Automobile.Ignition();
+ 	}
+ 
+ 	public void Stop()
+ 	{
+ 	 m_Automobile.Stop();
+ 	}
+ 	}
+
+	class Program
+	 {
+ 	  static void Main(string[] args)
+ 	  {
+ 	   IAutomobile automobile = new Jeep();
+ 	   //IAutomobile automobile = new SUV();
+ 	   AutomobileController automobileController = new AutomobileController(automobile);
+ 	   automobile.Ignition();
+ 	   automobile.Stop();
+ 
+ 	   Console.Read();
+ 	   }
+	}
+	In the above code, IAutomobile interface is in an abstraction layer and AutomobileController as the higher-level module.
+
+The Repository-Service Pattern with DI and ASP.NET 5.0?
+
+	The Dependency Injection Design Pattern in C# is a process in which we are injecting the object of a class into a class that depends on that object. 
+	The Dependency Injection design pattern is the most commonly used design pattern nowadays to remove the dependencies between the objects.
+
+	The Repository-Service pattern breaks up the business layer of the app into two distinct layers.
+		
+		The lower layer is the Repositories. These classes handle getting data into and out of our data store, with the important caveat that each 
+		Repository only works against a single Model class. So, if your models are Dogs, Cats, and Rats, you would have a Repository for each, the 
+		DogRepository would not call anything in the CatRepository, and so on.
+
+		The upper layer is the Services. These classes will have Repositories injected to them and can query multiple Repository classes and combine 
+		their data to form new, more complex business objects. Further, they introduce a layer of abstraction between the web application and the 
+		Repositories so that they can change more independently.
+
+	public class FoodItem //model objects FoodItem
+	{
+    	public int ID { get; set; }
+    	public string Name { get; set; }
+    	public decimal SalePrice { get; set; }
+    	public decimal UnitPrice { get; set; }
+    	public int Quantity { get; set; }
+    	public decimal Profit
+    	{
+        get
+        {
+            return (SalePrice * Quantity) - (UnitPrice * Quantity);
+        }
+    	}
+	}
+
+	public class Ticket  //model objects Ticket
+	{
+    	public int ID { get; set; }
+    	public string MovieName { get; set; }
+    	public decimal SalePrice { get; set; }
+    	public decimal StudioCutPercentage { get; set; }
+    	public int Quantity { get; set; }
+    	public decimal Profit
+    	{
+        get
+        {
+            return (Quantity * SalePrice) 
+                   - (StudioCutPercentage * (Quantity * SalePrice));
+        }
+    	}
+    	public decimal ProfitPerItem
+    	{
+        get
+        {
+            return SalePrice - (StudioCutPercentage * SalePrice);
+        }
+    	}
+	}
+
+	public class FinancialStats // We will also need a simple model class FinancialStats to represent the financial statistics
+	{
+    	public decimal AverageTicketProfit { get; set; }
+    	public decimal AverageFoodItemProfit { get; set; }
+	}
+	
+	The Repositories are intended to deal with operations for a single business model. This commonly includes CRUD functionality, and might also include more 
+	complex methods (e.g. querying for a collection of objects, or running stats against said collection).
+
+	public interface IFoodRepository
+	{
+    	List<FoodItem> GetAllSold();
+	}
+
+	public class FoodRepository : IFoodRepository
+	{
+	public List<FoodItem> GetAllSold()
+    	{
+        //In a real project, this is where you 
+        //would call your database/datastore for this info
+        List<FoodItem> items = new List<FoodItem>()
+        {	 new FoodItem()
+            {
+                ID = 14,
+                Name = "Milk Duds",
+                SalePrice = 4.99M,
+                UnitPrice = 1.69M,
+                Quantity = 43
+            },
+	     new FoodItem()
+            {
+                ID = 3,
+                Name = "Sour Gummy Worms",
+                SalePrice = 4.89M,
+                UnitPrice = 1.13M,
+                Quantity = 319
+            }};
+
+	 return items;
+    	}
+	}
+
+	public interface ITicketRepository
+	{
+    	List<Ticket> GetAllSold();
+	}
+
+	public class TicketRepository : ITicketRepository
+	{
+    	public List<Ticket> GetAllSold()
+    	{
+		 List<Ticket> tickets = new List<Ticket>()
+        {
+            new Ticket()
+            {
+                ID = 1953772,
+                MovieName = "Joker",
+                SalePrice = 8.99M,
+                StudioCutPercentage = 0.75M,
+                Quantity = 419
+            },
+            new Ticket()
+            {
+                ID = 2817721,
+                MovieName = "Toy Story 4",
+                SalePrice = 7.99M,
+                StudioCutPercentage = 0.9M,
+                Quantity = 112
+            }};
+
+        return tickets;
+    	}
+	}
+
+	Building the Services
+	Recall that the Service classes are designed to do two things:
+
+	Query one or more Repositories AND
+	Implement their own functionality, which is useful when said functionality deals with more than one business object.
+	
+	public interface ITicketService
+	{
+    	List<Ticket> GetAllSold();
+	}
+
+	public interface IFoodService
+	{
+    	List<FoodItem> GetAllSold();
+	}
+
+	public class TicketService : ITicketService
+	{
+    	private readonly ITicketRepository _ticketRepo;
+
+    	public TicketService(ITicketRepository ticketRepo)
+    	{
+        _ticketRepo = ticketRepo;
+    	}
+
+    	public List<Ticket> GetAllSold() => _ticketRepo.GetAllSold();
+	}
+
+	public class FoodService : IFoodService 
+	{
+    	private readonly IFoodRepository _foodRepo;
+
+    	public FoodService(IFoodRepository foodRepo)
+    	{
+        _foodRepo = foodRepo;
+    	}
+
+   	public List<FoodItem> GetAllSold() => _foodRepo.GetAllSold();
+	}
+
+	https://urldefense.com/v3/__https://exceptionnotfound.net/the-repository-service-pattern-with-dependency-injection-and-asp-net-core/__;!!F_S_FTKmJFE!27UfLVmBsH60SPBa13433nRqSf4jYM375CxVoxf_bWdATxL6b7U5q1V0EzZgCQtMapB56U4uI0BvJl3yFsjokNCA7cuV$  ---> for more details

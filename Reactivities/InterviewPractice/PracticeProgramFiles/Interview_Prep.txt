@@ -1,0 +1,639 @@
+IEnumerable
+	IEnumerable exists in System.Collections Namespace.
+	IEnumerable can move forward only over a collection, it can’t move backward and between the items.
+	IEnumerable is best to query data from in-memory collections like List, Array, etc.
+	While query data from a database, IEnumerable execute a select query on the server side, load data in-memory on a client-side and then filter data.
+	IEnumerable is suitable for LINQ to Object and LINQ to XML queries.
+	MyDataContext dc = new MyDataContext ();
+	IEnumerable<Employee> list = dc.Employees.Where(p => p.Name.StartsWith("S"));
+	list = list.Take<Employee>(10);
+
+IQueryable
+	IQueryable exists in System. Linq Namespace.
+	While query data from a database, IQueryable execute the select query on the server side with all filters.
+	 MyDataContext dc = new MyDataContext ();
+	IQueryable<Employee> list = dc.Employees.Where(p => p.Name.StartsWith("S"));
+	list = list.Take<Employee>(10);
+	
+Tuple?
+	The Tuple<T> class was introduced in .NET Framework 4.0. A tuple is a data structure that contains a sequence of elements of different data types. 
+	It can be used where you want to have a data structure to hold an object with properties, but you don't want to create a separate type for it.
+	Tuple<int, string, string> person = 
+                        new Tuple <int, string, string>(1, "Steve", "Jobs");
+	var person = Tuple.Create(1, "Steve", "Jobs");
+	
+	Accessing Tuple Elements
+	person.Item1; // returns 1
+	person.Item2; // returns "Steve"
+	person.Item3; // returns "Jobs"
+
+	Tuples can be used in the following scenarios:
+	When you want to return multiple values from a method without using ref or out parameters.
+	When you want to pass multiple values to a method through a single parameter.
+	When you want to hold a database record or some values temporarily without creating a separate class.
+
+	Tuple Limitations:
+	The Tuple is a reference type and not a value type. It allocates on heap and could result in CPU intensive operations.
+	The Tuple is limited to include eight elements. You need to use nested tuples if you need to store more elements. However, this may result in ambiguity.
+	The Tuple elements can be accessed using properties with a name pattern Item<elementNumber>, which does not make sense.
+
+EVENTS?
+
+	Events are nothing just a user action.
+
+	HOW EVENTS WORK WITH DELEGATES?
+	Delegates are used to reference a method. An Event is associated with Event Handler using Delegates. 
+	When an Event raise, it sends a signal to delegates and delegates executes the right function.
+
+	WHAT IS PUBLISHER-SUBSCRIBER MODEL?
+	There are two parts in any event handling program. One part is Publisher that contains definition of events and delegates 
+	and another part is Subscriber that accepts the event and provides an event handler.
+
+	public delegate void Notify();  // delegate
+                    
+	public class ProcessBusinessLogic
+	{
+    	 public event Notify ProcessCompleted; // event
+	}
+
+	In the above example, we declared a delegate Notify and then declared an event ProcessCompleted of delegate type Notify using "event" keyword 
+	in the ProcessBusinessLogic class. Thus, the ProcessBusinessLogic class is called the publisher. The Notify delegate specifies the signature for 
+	the ProcessCompleted event handler. It specifies that the event handler method in subscriber class must have a void return type and no parameters.
+
+	Now, let's see how to raise the ProcessCompleted event. Consider the following implementation.
+
+	Example: Raising an Event
+
+	public delegate void Notify();  // delegate
+                    
+	public class ProcessBusinessLogic
+	{
+    	public event Notify ProcessCompleted; // event
+
+    	public void StartProcess()
+    	{
+        Console.WriteLine("Process Started!");
+        // some code here..
+        OnProcessCompleted();
+    	}
+
+    	protected virtual void OnProcessCompleted() //protected virtual method
+    	{
+        //if ProcessCompleted is not null then call delegate
+        ProcessCompleted?.Invoke(); 
+    	}
+	}
+
+	Example: Consume an Event
+
+	class Program
+	{
+    	public static void Main()
+    	{
+        ProcessBusinessLogic bl = new ProcessBusinessLogic();
+        bl.ProcessCompleted += bl_ProcessCompleted; // register with an event
+        bl.StartProcess();
+    	}
+
+   	 // event handler
+    	public static void bl_ProcessCompleted()
+    	{
+        Console.WriteLine("Process Completed!");
+    	}
+	}
+	
+
+Delegate?
+
+	A delegate is an object which refers to a method or you can say it is a reference type variable that can hold a reference to the methods. 
+	Delegates in C# are similar to the function pointer in C/C++. It provides a way which tells which method is to be called when an event is triggered.
+	
+	class Geeks {
+	public delegate void addnum(int a, int b);
+	public delegate void subnum(int a, int b);
+	public void sum(int a, int b) { Console.WriteLine("(100 + 40) = {0}", a + b); }
+	public void subtract(int a, int b){ Console.WriteLine("(100 - 60) = {0}", a - b); }
+	public static void Main(String []args){
+	Geeks obj = new Geeks();
+	addnum del_obj1 = new addnum(obj.sum);
+    	subnum del_obj2 = new subnum(obj.subtract);
+	// pass the values to the methods by delegate object
+    	del_obj1(100, 40);
+    	del_obj2(100, 60);
+	// These can be written as using
+    	// "Invoke" method
+    	// del_obj1.Invoke(100, 40);
+    	// del_obj2.Invoke(100, 60);
+	}
+	}
+
+WCF
+---
+WCF?
+	WCF stands for Windows Communication Foundation. It is basically used to create a distributed and interoperable Application. 
+	WCF Applications came into the picture in .Net 3.0 Framework. This is a framework, which is used for creating Service oriented Applications.
+	
+ABCs of WCF?
+	In WCF to define an endpoint ABC is required to establish the communication.
+	A stands for Address, B stands for Binding and the C stands for Contract.
+
+	Address:
+	https://urldefense.com/v3/__http://OnlineShoppingServer.com:8001/Service__;!!F_S_FTKmJFE!27UfLVmBsH60SPBa13433nRqSf4jYM375CxVoxf_bWdATxL6b7U5q1V0EzZgCQtMapB56U4uI0BvJl3yFsjokFGDlb11$ 
+	HTTP is the transport schema
+	OnlineShoppingServer.com is the server location
+	8001 is PORT number where the server is listening for incoming requests.
+ 	Service is the relative location of the resource on the server.
+
+	HTTP : It's a protocol for communication over the web (uses TCP at a lower level).
+	TCP : High performance communication in WCF. Good for intranet scenarios.
+	Named Pipe : Fast and reliable communication between client and server running on the same machine.
+	MSMQ : Used when the client enqueues a message that a service can then consume later.
+
+	Binding:
+	It is about how the messages are handled in the service side and the client side. Binding is a group of elements that correspond to the transport 
+	and protocol channels located in the channel stack. The channel stack is the sequence of channels that each passes through to the runtime execution. 
+	
+	Transport Channel: it is responsible for transporting messages from the client to the server using the transport protocols like HTTP, HTTPS, TCP, 
+	Named Pipes or MSMQ. The main responsibility is message encoding and transport.
+	
+	Protocol Channel: The protocol channel contains protocols like Security Protocol, Reliable Messaging and Transaction Protocol. 
+	Responsible for providing security features like authorization, authentication, protection and confidentiality.
+	
+	Protocol Channel
+	Security Protocol
+	Reliable Messaging
+	Transaction Protocol
+
+	Contract: Agreement 
+	The contract is an agreement between the client and the server about the structure and content of messages being exchanged. 
+	The Data Contract is about the structure of the message, whereas the message contract is about the content of the message being exchanged.
+
+	Service contracts : Service contracts define the Interface for the service.
+	Operation Contract : An Operation Contract defines the method exposed to the client to exchange the information between the client and server.
+	Data Contract : Data Contracts define the data type for variables that are the same as get and set properties but the difference is that a Data Contract 
+			in WCF is used to serialize and deserialize the complex data. It defines how data types are serialized and deserialized. 
+			Using serialization, you can convert an object into a sequence of bytes that can be transmitted over a network. Using de-serialization, 
+			you reassemble an object from a sequence of bytes that you receive from a calling application.
+	Message contracts : The default SOAP message format is provided by the WCF runtime for communication between the client and the service.
+	Fault Contract : A Fault Contract handles the exception and understands the cause of the error that occurs in the WCF service.
+
+What are the various ways of hosting a WCF service?
+
+	There are four ways of hosting a WCF service.
+	Self-Hosting
+	Windows services hosting
+	IIS hosting
+	Windows Activation Services hosting (WAS)
+
+What are the different types of bindings in WCF?
+	Basic binding
+	Web binding
+	Web Service (WS) binding
+	WS Dual binding
+	TCP binding
+	IPC binding
+	MSMQ bindingFederated WS binding
+	Peer Network binding
+	MSMQ integration binding
+
+What are the ways to create a WCF Client?
+	There are two ways to create a WCF Client or calling a WCF Service as:
+	WCF Proxy
+	Channel factory
+
+What is Instance Management in WCF?
+	WCF manages the session by creating the instance of the service class. This created instance(s) handle the incoming service request. 
+	In WCF, the session is the way of managing the services instance(s) so that the server can use these instances in an optimized way. 
+	At the server side, the InstanceContext class is used to manage service class instance. There are following instance management ways :
+
+	Per Call
+	Per Session
+	Single
+
+What is Concurrency Management in WCF?
+	Concurrency management is closely related to the Instance management in WCF but both are two different things. 
+	Instance management specifies how the service instances are created while Concurrency management specifies how many concurrent requests 
+	are handled by the service instances. By using concurrency, you can make your service instance thread-safe. 
+	By default, a per-call service instance is thread-safe since each request is served by a new service instance. 
+	A per-session service instance is not thread-safe since multiple requests of a client are served by a single service instance. 
+	Hence, it’s required concurrency management. A single service instance is not thread-safe since multiple requests of all clients 
+	are served by a single service instance. Hence, it’s required concurrency management.
+	
+What is Impersonation?
+	Impersonation is a way to authorize a caller (client) identity to access the service domain’s resources. 
+	The service resources may be local files or database tables and should be on the same machine on which service is hosted. 
+	By default, impersonation is disabled and resources are accessed by using the WCF service's process identity.
+
+What is WCF Data Service?
+	WCF Data Services uses OData (Open Data Protocol) protocol for querying or manipulating the data. WCF Data Services is built on top of WCF REST Services. 
+	It is a RESTful service to support CRUD operations on the database using the HTTP protocol. It supports all database operations using URI. 
+	DATA protocol can expose data from the relational database, File systems, Web sites, services etc. It supports XML or JSON format for exposing the data.
+---
+SQL
+---
+
+	executeQuery(): This method is used to execute statements that returns tabular data (example select). It returns an object of the class ResultSet.
+	ExecuteNonQuery:  Executes Insert, Update, and Delete statements (DML statements) and returns the number of rows affected.
+	
+	ExecuteReader: Executes the SQL query (Select statement) and returns a Reader object which can perform a forward only traversal across the set of records being fetched.
+	ExecuteScalar(): ExecuteScalar is a method of SQLCommand that Executes the query, and returns the first column of the first row of the result set returned by the query.
+
+	DataReader is used to read the data from the database and it is a read and forward only connection oriented architecture during fetch the data from database.
+	DataReader will fetch the data very fast when compared with dataset. Generally, we will use ExecuteReader object to bind data to datareader.
+
+	DataSet is a disconnected orient architecture that means there is no need of active connections during work with datasets and it is a collection of DataTables
+	and relations between tables. It is used to hold multiple tables with data. You can select data form tables, create views based on table 
+	and ask child rows over relations. Also DataSet provides you with rich features like saving data as XML and loading XML data.
+
+	DataAdapter will acts as a Bridge between DataSet and database. This dataadapter object is used to read the data from database and bind that data to dataset.
+	Dataadapter is a disconnected oriented architecture.
+
+	DataTable represents a single table in the database. It has rows and columns. There is no much difference between dataset and datatable, 
+	dataset is simply the collection of datatables. 
+
+Which is faster DataSet or DataReader?
+	DataReader is a stream which is readonly and forward only. DataReader releasese the records as query executes and do not wait for the entire query to execute. 
+	Therefore it is very fast as compare to the dataset. It releases only when read method is called.
+
+
+------------
+ASP.NET Core
+------------
+
+Describe the ASP.NET Core?
+
+	ASP.NET Core is an open-source and cross-platform that allows you to build modern, Internet-connected and cloud enabled applications.
+
+	With ASP.NET Core you can
+	build web applications, IoT (Internet of things) apps, services and mobile Backends.
+	run on .Net Core.
+	You can do your development on Linux, Windows and MacOS.
+	deploy your code to cloud or on-premises
+
+What is the role of Startup class?
+
+	Startup class is responsible for configuration related things as below.
+		It configures the services which are required by the app.
+		It defines the app's request handling pipeline as a series of middleware components.
+
+	// Startup class example
+	public class Startup 
+	{
+    	public Startup(IConfiguration configuration){ Configuration = configuration; }
+    	public IConfiguration Configuration { get; }
+
+    	public void ConfigureServices(IServiceCollection services) { services.AddRazorPages(); }
+
+    	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    	{
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Error");
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+        // other middleware components
+   	 }
+	}
+	Startup class is specified inside the 'CreateHostBuilder' method when the host is created.
+	Multiple Startup classes can also be defined for different environments, At run time appropriate startup class is used.
+
+What is the role of ConfigureServices and Configure method?
+
+	ConfigureServices method is optional and defined inside startup class.It gets called by the host before the 'Configure' method to configure the app's services.
+	Configure method is used to add middleware components to the IApplicationBuilder instance that's available in Configure method.
+	Configure method also specifies how the app responds to HTTP request and response. ApplicationBuilder instance's 'Use...' 
+	extension method is used to add one or more middleware components to request pipeline.
+
+	You can configure the services and middleware components without the Startup class and it's methods, by defining this configuration inside the 
+	Program class in CreateHostBuilder method.
+
+ Describe the Dependency Injection ?
+
+	Inversion of Control (IoC) is a design principle. It is used to invert different kinds of controls in object-oriented design to achieve loose coupling.
+	Dependency Injection is a Design Pattern that's used as a technique to achieve the Inversion of Control (IoC) between the classes and their dependencies.
+	
+	ASP.NET Core comes with a built-in Dependency Injection framework that makes configured services available throughout the application. 
+	You can configure the services inside the ConfigureServices method as below. services.AddScoped();
+
+	DI framework solves these problems as below.
+	Use Interfaces or base class to abstract the dependency implementation.
+	Dependencies are registered in the Service Container provided by ASP.NET Core inside Startup class 'ConfigureServices' method.
+	Dependencies are injected using constructor injection and the instance is created by DI and destroyed when no longer needed.
+
+	But these direct dependencies can be problematic for the following reasons.
+	If you want to replace 'MyDependency' with a different implementation then the class must be modified.
+	It's difficult to Unit Test.
+	If MyDependency class has dependencies then it must be configured by class. If Multiple classes have dependency on 'MyDependency', the code becomes scattered.
+	Public class A {
+	MyDependency dep = new MyDependency();
+
+	public void Test(){
+	dep.SomeMethod();
+	 }
+	}
+
+Describe the Service Lifetimes ?
+
+	Transient - Services with transient lifetime are created each time they are requested from service container. 
+	So it's best suited for stateless, light weight services.
+	Scoped - Services with scoped lifetime are created once per connection or client request. When using scoped service in middleware then inject the service 
+	via invoke or invokeAsync method. You should not inject the service via constructor injection as it treats the service behavior like Singleton.
+	Singleton - Service with singleton lifetime is created once when first time the service is requested. 
+	For subsequent requests same instance is served by service container.
+
+Explain the Middleware in ASP.NET Core ?
+
+	The Request handling pipeline is a sequence of middleware components where each component performs the operation on 
+	and either call the next middleware component or terminate the request. When a middleware component terminates the request,
+	it's called Terminal Middleware as It prevents next middleware from processing the request.You can add a middleware component 
+	to the pipeline by calling .Use... extension method as below.
+
+	 app.UseHttpsRedirection();
+     	 app.UseStaticFiles();
+   	 app.UseRouting();
+
+What is Request delegate?
+
+	Request delegates handle each HTTP request and are used to build request pipeline. It can configured using Run, Map and Use extension methods. 
+	An request delegate can be a in-line as an anonymous method (called in-line middleware) or a reusable class. These classes or in-line methods
+	are called middleware components.	
+	
+What is Host in ASP.NET Core?
+
+	Host encapsulates all the resources for the app. On startup, ASP.NET Core application creates the host. The Resources which are encapsulated 
+	by the host include:
+
+	HTTP Server implementation
+	Dependency Injection
+	Configuration
+	Logging
+	Middleware components
+
+=============================================
+MVC
+=============================================
+
+MVC Validation using Data Annotation Attributes?
+
+	System.ComponentModel.DataAnnotations
+
+	Attribute		Usage
+	
+	Required		Specifies that a property value is required.
+	StringLength		Specifies the minimum and maximum length of characters that are allowed in a string type property.
+	Range			Specifies the numeric range constraints for the value of a property.
+	RegularExpression	Specifies that a property value must match the specified regular expression.
+	CreditCard		Specifies that a property value is a credit card number.
+	CustomValidation	Specifies a custom validation method that is used to validate a property.
+	EmailAddress		Validates an email address.
+	FileExtension		Validates file name extensions.
+	MaxLength		Specifies the maximum length of array or string data allowed in a property.
+	MinLength		Specifies the minimum length of array or string data allowed in a property.
+	Phone			Specifies that a property value is a well-formed phone number.
+
+
+	@model MVC_BasicTutorials.Models.Student
+
+	@{
+    	 	ViewBag.Title = "Edit";
+    		Layout = "~/Views/Shared/_Layout.cshtml";
+	}
+
+	<h2>Edit</h2>
+
+	@using (Html.BeginForm())
+	{
+    		@Html.AntiForgeryToken()
+    
+   		 <div class="form-horizontal">
+        	 <h4>Student</h4>
+        	<hr />
+       		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        	@Html.HiddenFor(model => model.StudentId)
+
+       		 <div class="form-group">
+           	 @Html.LabelFor(model => model.StudentName, htmlAttributes: new { @class = "control-label col-md-2" })
+            	<div class="col-md-10">
+                @Html.EditorFor(model => model.StudentName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StudentName, "", new { @class = "text-danger" })
+            	</div>
+        	</div>
+
+        	<div class="form-group">
+           	 @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+            	<div class="col-md-10">
+                @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+            	</div>
+       		 </div>
+
+        	<div class="form-group">
+            	<div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            	</div>
+       		 </div>
+   		 </div>
+		}
+
+		<div>
+   		 @Html.ActionLink("Back to List", "Index")
+		</div>
+
+How to use AJAX in MVC?
+
+	@section Scripts  
+	{  
+    		<script type="text/javascript">  
+    		$(function () {  
+       		LoadData();  
+        	$("#btnSave").click(function () {  
+            	//alert("");  
+            	var std = {};  
+            	std.studentName = $("#StudentName").val();  
+            	std.studentAddress = $("#StudentAddress").val();  
+            	$.ajax({  
+                type: "POST",  
+                url: '@Url.Action("createStudent")',  
+                data: '{std: ' + JSON.stringify(std) + '}',  
+                dataType: "json",  
+                contentType: "application/json; charset=utf-8",  
+                success: function () {  
+                   // alert("Data has been added successfully.");  
+                    LoadData();  
+                },  
+                error: function () {  
+                    alert("Error while inserting data");  
+                }  
+           	 });  
+            	return false;  
+        	});  
+    		});  
+
+		function LoadData() {  
+        	$("#tblStudent tbody tr").remove();  
+        	$.ajax({  
+            	type: 'POST',  
+            	url: '@Url.Action("getStudent")',  
+            	dataType: 'json',  
+           	data: { id: '' },  
+            	success: function (data) {  
+                var items = '';  
+                $.each(data, function (i, item) {  
+                    var rows = "<tr>"  
+                    + "<td class='prtoducttd'>" + item.studentID + "</td>"  
+                    + "<td class='prtoducttd'>" + item.studentName + "</td>"  
+                    + "<td class='prtoducttd'>" + item.studentAddress + "</td>"  
+                    + "</tr>";  
+                    $('#tblStudent tbody').append(rows);  
+                });  
+            	},  
+            	error: function (ex) {  
+                var r = jQuery.parseJSON(response.responseText);  
+                alert("Message: " + r.Message);  
+                alert("StackTrace: " + r.StackTrace);  
+                alert("ExceptionType: " + r.ExceptionType);  
+            	}  
+        	});  
+        	return false;  
+    		}  
+    		</script>  
+		}  
+
+ASP.NET MVC Scaffolding?
+
+	Scaffolding is a technique used by MVC to generate code for basic CRUD (create, read, update, and delete) operations against database effectively.	
+	Scaffolding consists of page templates, entity page templates, field page templates, and filter templates. These templates are called Scaffold templates 
+	and allow you to quickly build a functional data-driven Website.
+
+Manage Session In MVC?
+
+	ASP.NET MVC provides three ways (TempData, ViewData and ViewBag) to manage sessions, apart from that we can use session variable, hidden fields 
+	and HTML controls for doing it.
+
+	TempData
+	TempData in ASP.NET MVC is basically a dictionary object derived from TempDataDictionary.
+	TempData internally uses session variable and stays for a subsequent HTTP Request. This means it maintains data when you move one controller to 
+	another controller or one action to another action. As this is a dictionary object null checking and typecasting is required while using it.
+	TempData["Name"] = "Kailash";
+	string name = TempData["Name"].ToString();
+	TempData gets destroyed immediately after it’s used (once value is read from tempdata) in subsequent HTTP request.
+	
+	ViewData
+	ViewData maintains data when you move from controller to view. It is also a dictionary object and derived from ViewDataDictionary. 
+	As Data is stored as Object in ViewData, while retrieving, the data it needs to be Type Casted to its original type as the data is stored as objects 
+	and it also requires NULL checks while retrieving.
+	ViewData["ViewDataName"] = "abc";
+	string abc = ViewData["ViewDataName"].ToString();
+	
+	ViewBag
+	The ViewBag is a dynamic type property of ControllerBase class which is the base class of all the controllers. 
+	It’s a dynamic wrapper around ViewData casting is not required when you use ViewBag. ViewBag only transfers data from controller to view, 
+	not visa-versa. ViewBag values will be null if redirection occurs.
+	ViewBag.Name = "Kailash";
+	string ViewBagname = ViewBag.Name;
+
+View Vs Partial View?
+
+	View
+	View contains the layout page
+	_viewstart page is rendered before any view is rendered
+	View may have markup tags like html, body, head, title, meta etc.
+	
+	Partial View
+	Partial view does not contain the layout page
+	Partial view does not check for a _viewstart.cshtml. We cannot place any common code for a partial view within the _viewStart.cshtml page.
+	The Partial view is specially designed to render within the view and as a result it does not contain any mark up.
+	Partial view is more lightweight than the view. We can also pass a regular view to the RenderPartial method.
+	If there is no layout page specified in the view, it can be considered as a partial view. In razor, there is no distinction between views 
+	and partial views as in the ASPX view engine (aspx and ascx).
+	
+	Render Partial View Using jQuery
+	<script type="text/jscript">  
+        $('#partialView').load('/shared/PartialViewExample’);  
+	</script> 
+
+	HTML helper has two methods for rendering the partial view: Partial and RenderPartial.
+	<div>  
+    	@Html.Partial("PartialViewExample")  
+	</div>  
+	<div>  
+    	@{  
+        Html.RenderPartial("PartialViewExample");  
+    	}  
+	</div>
+
+	The result of the RenderPartial method is written directly into the HTTP response, it means that this method used the same TextWriter object 
+	as used by the current view. This method returns nothing.
+	
+	The Html.RenderPartial method writes output directly to the HTTP response stream so it is slightly faster than the Html.Partial method.
+
+Media queries in angular?
+
+	Using Media queries, now we can define styles that would be applied for different devices.
+	Media queries give us the possibility to target various parameters including width and height (both with min and max prefixes), orientation, 
+	type of presentation (screen, reader, print), available colours, aspect ratio, resolution, availability of JavaScript parser etc.
+
+	@media screen and (max-width: 768px) {
+  	header nav {
+    		display: none;
+  	}
+	}
+	@media screen and (orientation: landscape) {
+  	header nav {
+    	position: fixed;
+   	left: 0;
+    	width: 20vw;
+  	}
+	}	
+	Header navigation would be rendered in a block. Unless the screen was smaller than 769px (typical mobile resolution), in which case it would hidden. 
+	Unless, the screen is in landscape mode (width greater than height), in which case it would be fixed on the left and take 20% of the viewport's width.
+
+Right Triangle Star Pattern Program in C#?	
+
+	*
+	**
+	***
+	****
+	*****
+	******
+	using System;
+	public class AreaOfRectangle
+	{
+    	public static void Main()
+    	{
+        Console.WriteLine("Enter number of rows :");
+        int rows = Convert.ToInt32(Console.ReadLine());
+        for (int i = 0; i <= rows; i++)
+        {
+            for (int j = 0; j <= i; j++)
+            {
+                Console.Write("*");
+            }
+            Console.WriteLine("\n");
+        }
+        Console.ReadKey();
+    	}
+	}
+
+Display the pattern like a pyramid?
+
+	int i,j,n;
+	n= Convert.ToInt32(Console.ReadLine());    
+   	for(i=0;i<n;i++)
+   	{
+     	for(j=1;j<=n-i;j++)
+     	Console.Write(" ");
+     	for(j=1;j<=2*i-1;j++)
+       	Console.Write("*");
+     	Console.Write("\n");
+   	}
+
+
+	
+	
