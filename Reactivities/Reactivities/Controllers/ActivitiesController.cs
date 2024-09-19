@@ -11,18 +11,18 @@ namespace API.Controllers
     {
         private readonly DataContext _context;
 
-        public ActivitiesController(DataContext context )
+        public ActivitiesController(DataContext context)
         {
-          _context = context;
+            _context = context;
         }
 
         [HttpGet]//api/activities
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<Activity>>> GetActivities()
         {
             return await _context.Activities.ToListAsync();
         }
-      
+
         [HttpGet("{id}")]//api/activities/123
         [Authorize(Policy = "User")]
         public async Task<ActionResult<Activity>> GetActivities(Guid id)

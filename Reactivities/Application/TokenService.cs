@@ -26,12 +26,12 @@ namespace Application
              new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(ClaimTypes.Role, user.Role)  // Add role claim
             };
-            var key=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key)); 
-            var creds=new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer:_issuer,
-                audience:_audience,
+                issuer: _issuer,
+                audience: _audience,
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: creds
