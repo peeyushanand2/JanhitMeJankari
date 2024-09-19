@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "http": {
+    "Reactivities": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
