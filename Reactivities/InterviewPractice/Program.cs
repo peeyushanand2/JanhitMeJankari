@@ -1,8 +1,12 @@
 ﻿using InterviewPractice.PracticeQuestion.Integer;
+using InterviewPractice.PracticeQuestion.LL;
 using InterviewPractice.PracticeQuestion.Patterns;
 using InterviewPractice.PracticeQuestion.QuickTest;
 using InterviewPractice.PracticeQuestion.String;
+#region LL
 
+CustomLinkedList newLinkedList = new CustomLinkedList(4);
+#endregion
 #region Array
 
 #endregion
