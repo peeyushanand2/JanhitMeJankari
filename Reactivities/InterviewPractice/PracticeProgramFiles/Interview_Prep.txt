@@ -1,3 +1,5 @@
+
+
 IEnumerable
 	IEnumerable exists in System.Collections Namespace.
 	IEnumerable can move forward only over a collection, it can’t move backward and between the items.
