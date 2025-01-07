@@ -1,10 +1,65 @@
 funtion
+Variadic parameter ... last of function
+Literal: {}
+- Array Literal
+- Slice Literal
+- Map Literal
+- Struct Literal
+
+for loop - use as while do while and for utilizing rang keyword.
+    need both key and value
+    for k, v := range data {
+		fmt.Printf("Key: %s Value: %s\n", k, v)
+	}
+     need only value
+    for _, v := range data {
+		fmt.Printf("Value: %s\n", v)
+	}
+    need only key
+    for k := range data {
+		fmt.Printf("Key: %s", k)
+	}
+
+if  direction check and and sign in scope
+if _, exist := data[key]; !exist {
+		fmt.Println("key not exist")
+		return
+	}
+   
+len
+cap
+make
+append
+copy
+
 3 main data structure in GO
-slice - nil slice means declare not initialized 
-z:=[]int[]                                                                      
-map -nil map means declare not initialized 
+array
+
+Reference Types:
+slice: make or {}
+map: make or {}
+channel (concurrency): make
+slice - dynamic arrar and can be use append method to add more item to this slice. if len < item in slice
+  nil slice means declare not initialized 
+z:=[]int[]  
+
+map -Key value pair-nil map means declare not initialized 
 var m map[int]string
+
 channel
 
 
 defer- will excute after retrun statement.
+Panic- unwanted app crash situation
+recover- recover form panic 
+
+error handling
+error directory
+error - built-in type to handle error values
+errors - library package
+ 
+err:= errors.New("key doesn't exist")
+return err
+
+wrap an error with some context value.
+Unwrap
