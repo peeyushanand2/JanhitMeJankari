@@ -31,7 +31,7 @@ cap
 make
 append
 copy
-
+---------------------------------------------------------------------------
 3 main data structure in GO
 array
 
@@ -48,11 +48,11 @@ var m map[int]string
 
 channel
 
-
+-----------------------------------------------------------
 defer- will excute after retrun statement.
 Panic- unwanted app crash situation
 recover- recover form panic 
-
+--------------------------------------------------------
 error handling
 error directory
 error - built-in type to handle error values
@@ -63,3 +63,29 @@ return err
 
 wrap an error with some context value.
 Unwrap
+----------------------------------------------------
+packages - need to create custom package
+
+--------------------------------------------------
+primitive types: string, int, bool, etc
+composite types: array, slice and map
+ 
+User-defined types
+ 
+Struct, interface
+ 
+public class Employee : user-defined data structure
+{
+    state: property or field 
+	behavior: method
+}
+Struct : user-defined data structure
+   state: property or field 
+   behavior: method
+Struct isolates both state and behavior  
+Structs created with states
+Behaviors can be added later outside the struct the body
+no inheritance here in go , have embadeding on struct to another struct 
+-- Reciever type
+  - Value type(copy new struct every time and same value return)-Pass by value
+  - Pointer type - pass by reference 

@@ -1,0 +1,17 @@
+create root dir: customerapp -> go mod init -> go.mod
+ 
+sub dirs:
+  - domain (library) -> domain entity and its persistence abstractions
+  - memstore (library) -> concrete implementation for persistence interfaces 
+  - cmd (main) -> Perform CRUD operations
+  func (cr CustomerRepository) GetById(id string) (domain.Customer, error) {
+    if v, ok :=cr.repository[id]; !ok {
+	    return domain.Customer{}, errors.New("customer doesn't exsit")
+	}
+  }
+  func (cr CustomerRepository) GetById(id string) (*domain.Customer, error) {
+    if v, ok :=cr.repository[id]; !ok {
+	    return nil, errors.New("customer doesn't exsit")
+	}
+  }
+  nil -> error, pointer, slice, map, channel (concurrency), interface
