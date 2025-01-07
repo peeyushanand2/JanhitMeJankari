@@ -1,7 +1,7 @@
 funtion
 3 main data structure in GO
 slice - nil slice means declare not initialized 
-z:=[]int[]
+z:=[]int[]                                                                      
 map -nil map means declare not initialized 
 var m map[int]string
 channel
