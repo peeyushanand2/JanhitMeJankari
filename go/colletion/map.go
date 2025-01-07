@@ -29,7 +29,7 @@ func updateItem(key, value string) {
 func getById(key string) string {
 	if _, exist := data[key]; !exist {
 
-		fmt.Println("data does not exist for %d", key)
+		fmt.Printf("data does not exist for %d", key)
 	}
 
 	return data[key]
