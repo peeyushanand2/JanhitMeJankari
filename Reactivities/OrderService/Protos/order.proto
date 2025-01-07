@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "OrderService";  // Ensure this matches your project namespace
+
+package orderservice;
+
+service OrderService {
+    rpc GetOrdersForUser (UserRequest) returns (OrderList);
+}
+
+message UserRequest {
+    string user_id = 1;
+}
+
+message Order {
+    string id = 1;
+    string product = 2;
+    double price = 3;
+}
+
+message OrderList {
+    repeated Order orders = 1;
+}

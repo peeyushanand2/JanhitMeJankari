@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "UserService";  // Ensure this is set correctly
+
+package myuser;
+
+service MyUser {
+    rpc GetUserList (UserRequest) returns (UserList);
+}
+
+message UserRequest {
+    string user_id = 1;
+}
+
+message User {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+message UserList {
+    repeated User users = 1;
+}

@@ -354,3 +354,14 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 /target
+go/pkg/cache/download/cloud.google.com/go/@v/list 
+go/pkg/cache/download/github.com/!one!of!one/xxhash/@v/list
+go/pkg/cache/download/cloud.google.com/go/firestore/@v/list
+go/pkg/github.com/
+go/pkg/golang.org/
+go/pkg/google.golang.org/
+go/pkg/honnef.co/go/
+go/pkg/mvdan.cc/
+go/pkg/gopkg.in/
+go/pkg/go.uber.org/
+go/pkg/cache/

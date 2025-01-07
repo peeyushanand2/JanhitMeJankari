@@ -4,8 +4,11 @@ using InterviewPractice.PracticeQuestion.Patterns;
 using InterviewPractice.PracticeQuestion.QuickTest;
 using InterviewPractice.PracticeQuestion.String;
 #region LL
+LinkedList myLinkedList = new LinkedList(4);
+//Print LL
+myLinkedList.Append(2);
+myLinkedList.PrintLL();
 
-CustomLinkedList newLinkedList = new CustomLinkedList(4);
 #endregion
 #region Array
 
@@ -64,6 +67,5 @@ d.CountDuplicate("Proograaam is test");
 RemoveDuplicateFromString rem = new RemoveDuplicateFromString();
 rem.RemoveDuplicate("Proograaam is test");
 #endregion
-
 
 Console.ReadKey();

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "DataProviderService.Protos";
+
+service ExampleServices 
+{ 
+	rpc GetExample (ExampleRequest) returns (ExampleResponse); 
+} 
+
+message ExampleRequest 
+{ 
+	string name = 1; 
+} 
+
+
+message ExampleResponse 
+{
+	string message = 1;
+}
