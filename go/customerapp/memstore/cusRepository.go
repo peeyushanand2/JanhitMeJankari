@@ -55,8 +55,8 @@ func (cr CustomerRepository) GetAll() ([]domain.Customer, error) {
 	if len(cr.repository) == 0 {
 		return nil, domain.DataNotFound
 	}
-	var lst []domain.Customer
-	lst = make([]domain.Customer, 0, len(cr.repository))
+	//var lst []domain.Customer
+	lst := make([]domain.Customer, 0, len(cr.repository))
 	for c := range cr.repository {
 		lst = append(lst, cr.repository[c])
 	}

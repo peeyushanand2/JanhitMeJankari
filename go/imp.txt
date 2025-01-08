@@ -127,6 +127,8 @@ func addTable(wg *sync.WaitGroup) {
     wgaddTable.Wait()
 }
 -------------------
-channel is data structure  and referece type 
+channel is data structure  and referece type //concurrency folder , matuable for go asyncfronous
 channel:make(map({string})string)
+buffered and unbuffered
+
 
