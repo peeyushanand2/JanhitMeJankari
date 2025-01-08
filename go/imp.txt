@@ -127,8 +127,36 @@ func addTable(wg *sync.WaitGroup) {
     wgaddTable.Wait()
 }
 -------------------
-channel is data structure  and referece type //concurrency folder , matuable for go asyncfronous
+
+
+"Pipeline" Concurrency Pattern:
+ 
+Problem: Print out fibonacci values of 
+10 randomly generated numbers
+ 
+Pipeline with three Goroutines:
+ 
+Goroutine 1: Find out 10 random numbers
+Goroutine 2: Find out fibonacci values for the value 
+             sent by Goroutine 1
+Goroutine 3: Print out fibonacci values for the value 
+             sent by Goroutine 2
+ 
+ channel is data structure  and referece type //concurrency folder , matuable for go asyncfronous
 channel:make(map({string})string)
 buffered and unbuffered
 
+chan<-  Channel direction for send only
+<-chan Channel direction for receive only
 
+select
+
+select {
+case fib := <-fibs:
+    fmt.Printf("Fibonacci value of %d is %d\n", fib.input, fib.value)
+case sqr := <-sqrs:
+    fmt.Printf("Square value of %d is %d\n", sqr.input, sqr.value)
+case <-time.After(time.Millisecond * 10):
+    // to do
+}
+mutex- for stop called by multiple threads
