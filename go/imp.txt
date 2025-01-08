@@ -89,3 +89,44 @@ no inheritance here in go , have embadeding on struct to another struct
 -- Reciever type
   - Value type(copy new struct every time and same value return)-Pass by value
   - Pointer type - pass by reference 
+
+
+  concurrency programming 
+  - goroutines
+  - channels
+  ----------------------
+M : N Scheduler
+M - no. of goroutines
+N - no of OS threads
+ 
+1 OS thread can be used for executing several ten thousands of
+goroutines
+ 
+goroutines not threads
+goroutines are light-weight threads
+one goroutine can be started with 4 KB size
+func addTable(wg *sync.WaitGroup) {
+    // Schedule the call to WaitGroup's Done to tell goroutine is completed.
+    defer wg.Done()
+    var wgaddTable sync.WaitGroup
+    for i := 1; i <= 10; i++ {
+       wgaddTable.Add(1)
+       go func() {
+          defer wgaddTable.Done()
+          // do the code
+       }()
+       sleep := rand.Int63n(1000)
+       time.Sleep(time.Duration(sleep) * time.Millisecond)
+       fmt.Println("Addition Table for:", i)
+       for j := 1; j <= 10; j++ {
+          //res = i + j
+          fmt.Printf("%d+%d=%d\t", i, j, i+j)
+       }
+       fmt.Println("\n")
+    }
+    wgaddTable.Wait()
+}
+-------------------
+channel is data structure  and referece type 
+channel:make(map({string})string)
+
