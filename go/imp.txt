@@ -191,4 +191,26 @@ encoding/xml
 
 reflect/custom DTO . respose retur
 
-gin library
+Major Go web frameworks:
+	gin: https://github.com/gin-gonic/gin (most popular)
+	echo: https://github.com/labstack/echo (my recommendation)
+gin/echo http wrapper library
+
+Go Modules
+   -> go.mod
+         -> go.sum	
+ 
+to install a third-party library:
+    go get package_name -> source put into GOMODCACHE
+	go get github.com/labstack/echo/v4 	
+	go get github.com/gin-gonic/gin
+	go get -u github.com/gin-gonic/gin (take latest version)
+	go get -u (take latest of all libs)
+
+To update go.mod file:
+ 
+go mod tidy -> synchronise code with go.mod and go.sum
+  - Will run:
+       -> after referencing/dereferencing a new library
+	   -> before taking build
+	   -> before committing source code into version control system
