@@ -1,8 +1,9 @@
 package memstore
 
 import (
-	"customerapp/domain"
 	"fmt"
+
+	"customerapp/domain"
 )
 
 type CustomerRepository struct {

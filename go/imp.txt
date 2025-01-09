@@ -196,7 +196,7 @@ Major Go web frameworks:
 	echo: https://github.com/labstack/echo (my recommendation)
 gin/echo http wrapper library
 
-Go Modules
+GO MODULES
    -> go.mod
          -> go.sum	
  
@@ -214,3 +214,27 @@ go mod tidy -> synchronise code with go.mod and go.sum
        -> after referencing/dereferencing a new library
 	   -> before taking build
 	   -> before committing source code into version control system
+
+UNIT TESTING
+
+https://github.com/stretchr/testify
+
+- red green refactor
+
+standard library packages: testing (foundational library)
+						    net/http/httptest (writing unit tests for handlers)	
+testing doesn't provide assertion APIs
+ 
+Naming conventions:
+ 
+1: Test suite file, whose name ends with _test.go
+    go build or go install, exclude all _test.go files
+	"go test -v", command looks into _test.go files and run all unit tests
+  "go test -v -cover" to find coverage 
+2: Inside _test.go file, write unit test function with:
+    func TestXyz(t *testing.T)	{
+	}
+
+  Table- testing
+  Sub-level test: Within the unit test function, you can have sub tests
+for each test case of Table (a collection of test cases) 
