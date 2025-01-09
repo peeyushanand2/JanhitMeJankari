@@ -160,3 +160,33 @@ case <-time.After(time.Millisecond * 10):
     // to do
 }
 mutex- for stop called by multiple threads
+
+
+http 
+
+http rest api
+
+"/api/customers", Post => Create new resource on customer (domain entity)
+"/api/customers", Get =>  Get all all customers
+"/api/customers/{id}", Get =>  Get customer by given id
+"/api/customers/{id}", Put =>  Update customer by given id
+"/api/customers/{id}", Delete => Delete customer by given id
+
+servemux (net/http)
+echo (web framework)
+gin (web framework)
+ 
+type Note struct {
+	NoteID      string    `json:"noteid,omitempty"` // struct tag
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	CreatedOn   time.Time `json:"createdon,omitempty"`
+}
+ 
+struct tag is used to provide metadata to be used for encoding packages
+when they perform encoding and decoding
+ 
+encoding/json
+encoding/xml
+
+reflect/custom DTO . respose retur
