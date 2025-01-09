@@ -25,6 +25,7 @@ func main() {
 	}
 	log.Println("Listening...")
 	server.ListenAndServe() // Run the http server
+
 	// controller := controller.CustController{ // initialize customer controller
 	// 	Repository: memstore.NewCustomerRepository(),
 	// 	//Repository: mongodb.NewCustomerRepository(), // switching to another persistent store

@@ -13,7 +13,7 @@ type CustController struct {
 	Repository domain.CustomerRepository
 }
 
-//rest API //api/customers
+//rest API endpoint available at /api/customers
 
 func (cc *CustController) GetAllCustomers(w http.ResponseWriter, r *http.Request) {
 	// Get all
