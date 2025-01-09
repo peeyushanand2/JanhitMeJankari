@@ -3,7 +3,9 @@ package domain
 import "errors"
 
 type Customer struct {
-	ID, Name, Email string
+	ID    string `json:"id,omitempty"`
+	Name  string `json:"name"`
+	Email string `json:"email,omitempty"`
 }
 
 type CustomerRepository interface {

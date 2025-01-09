@@ -1,11 +1,12 @@
 package controller
 
 import (
-	"customerapp/domain"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
+
+	"customerapp/domain"
 )
 
 // CustController Organises the CRUD operations at UI layer.

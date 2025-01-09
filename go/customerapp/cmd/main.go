@@ -2,10 +2,11 @@ package main
 
 // Implement other methods for the type CustomerController
 import (
-	"customerapp/controller"
-	"customerapp/memstore"
 	"log"
 	"net/http"
+
+	"customerapp/controller"
+	"customerapp/memstore"
 )
 
 // Inside the main function
