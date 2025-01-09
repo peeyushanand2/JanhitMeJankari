@@ -26,8 +26,8 @@ func main() {
 	log.Println("Listening...")
 	server.ListenAndServe() // Run the http server
 	// controller := controller.CustController{ // initialize customer controller
-	// 	repository: memstore.NewCustomerRepository(),
-	// 	//repository: mongodb.NewCustomerRepository(), // switching to another persistent store
+	// 	Repository: memstore.NewCustomerRepository(),
+	// 	//Repository: mongodb.NewCustomerRepository(), // switching to another persistent store
 	// }
 	// var data []domain.Customer
 	// data = make([]domain.Customer, 0, 4)
