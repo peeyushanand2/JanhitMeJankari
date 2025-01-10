@@ -303,3 +303,5 @@ ent: library + code generation tool
 
 
 https://sqlc.dev
+
+NATS for event driven in GO
