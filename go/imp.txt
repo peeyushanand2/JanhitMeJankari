@@ -238,3 +238,68 @@ Naming conventions:
   Table- testing
   Sub-level test: Within the unit test function, you can have sub tests
 for each test case of Table (a collection of test cases) 
+
+"testing"
+"net/http/httptest"
+   -> ResponseRecorder: ResponseRecorder is an implementation for 
+      http.ResponseWriter interface that records all mutations made on 
+	  http Response to be used for testing.
+   -> Server: Server lets you create a test http Server to be used for testing.
+              Because there is a server (although a test server), you create
+			  http Client and send to request to the http server (test server)
+			  so that we can make assertion on the http response.
+--------------------------------------
+package context
+---------------------
+context:
+ 
+context.Context
+Package context defines the Context type, which carries deadlines, cancelation signals, and other request-scoped values across API boundaries and between processes.
+
+ 
+- cancellation signals or deadlines (timeout)
+- request-scoped values (key/value pair of values)
+context.Context created using:
+- WithCancel -> Cancellation Signal /concureencyx/ctx-cancel
+- WithDeadline -> deadlines (timeout) with exact date and time 
+- WithTimeout -> deadlines (timeout)
+- WithValue -> holding key/value pair of values /concureencyx/context/withvalue
+
+
+-------------------
+generics
+https://pkg.go.dev/maps
+https://pkg.go.dev/slices
+-------------------
+
+SLog
+--------------
+https://github.com/sirupsen/logrus
+ 
+https://github.com/uber-go/zap
+ 
+
+ logger.Info("Order", slog.Int("Order ID", o.ID), slog.String("CustomerID", o.CustomerID))
+// LogAttrs is a more efficient version of Logger.Log that accepts only Attrs.
+ structured logging 
+logger.LogAttrs(context.Background(), slog.LevelInfo, "Order has been created",
+    slog.String("created by", os.Getenv("USER")))
+----------------------------------
+    Database
+-----------------------
+ent framework 
+------------------mn/.
+go install entgo.io/ent/cmd/ent@latest
+ent: library + code generation tool
+ 
+1: install: go install entgo.io/ent/cmd/ent@latest
+2: generate schema for entity - Go to the root directory of your project, and run:
+ 
+   ent new entity_name (eg: ent new User)
+3: generate code - Run go generate from the root directory of the project as follows:
+ 
+	go generate ./ent (run this command after scheme updation)
+// schema
+
+
+https://sqlc.dev
