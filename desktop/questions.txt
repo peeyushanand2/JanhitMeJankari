@@ -23,3 +23,5 @@ Given a rotated sorted array, write a function to find the minimum element in O(
 Input: [3, 4, 5, 1, 2]
 
 Output: 1
+
+4.Create a thread-safe Singleton class in C# that ensures only one instance of the class is created and provides global access to that instance.
