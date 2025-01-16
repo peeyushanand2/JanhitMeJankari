@@ -2,10 +2,10 @@
 
 
 
-Implement a thread-safe singleton class in C# using double-check locking.
+1. Implement a thread-safe singleton class in C# using double-check locking.
 
 
-Write a logic to convert one dimensional array to a two-dimensional array?
+2. Write a logic to convert one dimensional array to a two-dimensional array?
 
 Input {1,2,3,4,5,6}
 
