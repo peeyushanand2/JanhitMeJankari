@@ -60,12 +60,10 @@ bs.Method();
 
 #region String
 //Count duplicate in string 
-CountDuplicateInString d = new CountDuplicateInString();
-d.CountDuplicate("Proograaam is test");
+CountDuplicateInString.CountDuplicate("Proograaam is test");
 
 //Remove duplicate from string
-RemoveDuplicateFromString rem = new RemoveDuplicateFromString();
-rem.RemoveDuplicate("Proograaam is test");
+RemoveDuplicateFromString.RemoveDuplicate("Proograaam is test");
 #endregion
 
 Console.ReadKey();

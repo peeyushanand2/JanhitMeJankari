@@ -1,8 +1,8 @@
 ﻿namespace InterviewPractice.PracticeQuestion.String
 {
-    public class CountDuplicateInString
+    public static class CountDuplicateInString
     {
-        public void CountDuplicate(string input)
+        public static void CountDuplicate(string input)
         {
             IDictionary<char, int> dup = new Dictionary<char, int>();
             for (int i = 0; i < input.Length; i++)
@@ -29,17 +29,5 @@
                 Console.WriteLine($"{keyValuePair.Key} - {keyValuePair.Value}");
             }
         }
-
-        public async Task<int> tets()
-        {
-            // return 1;
-
-            //cal
-            //db
-            //ext epi
-
-            return 1;
-        }
-
     }
 }
