@@ -4,6 +4,17 @@ using InterviewPractice.PracticeQuestion.LL;
 using InterviewPractice.PracticeQuestion.Patterns;
 using InterviewPractice.PracticeQuestion.QuickTest;
 using InterviewPractice.PracticeQuestion.String;
+//Multiple task execution
+MultipleTask multipleTask = new MultipleTask();
+
+ 
+var task1=Task.Run(()=>multipleTask.Mehtod1());
+var task2=Task.Run(()=>multipleTask.Mehtod2());
+await task1;
+multipleTask.Mehtod3();
+await task2;
+//task1.ContinueWith(_ => multipleTask.Mehtod3());
+//await Task.WhenAll(task1, task2);
 #region LL
 LinkedList myLinkedList = new LinkedList(4);
 //Print LL
@@ -47,6 +58,8 @@ i1.Add();
 
 I2 i2 = a;
 i2.Add();
+
+
 #endregion
 
 #region Integer
