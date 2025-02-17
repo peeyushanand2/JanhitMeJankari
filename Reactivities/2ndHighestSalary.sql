@@ -17,9 +17,15 @@ select u.name,s.salary, Dense_rank() over ( order by salary desc) as salary_Rank
 on u.user_id=s.user_id) ranked 
 where salary_Rank=3
  
- --row_number create sequenceial number to each row.
+ --row_number -create sequenceial number to each row.
  select user_id, salary, row_number() over(order by salary desc) from Salary order by salary desc
    
+   --Rank()- it is also create sequesnce number for each row but for duplicate row ,will get same sequence number
+   --and next row will skip the next squence and asign next to next  sequence number.
+   select user_id,salary,rank() over(order by salary desc) from Salary order by salary desc
+
+   --Dense_rank()-it is same as rank but will not skip the next sequence number when data duplicat.
+   select user_id,salary,DENSE_RANK() over(order by salary desc) from Salary order by salary desc
 
   
   
