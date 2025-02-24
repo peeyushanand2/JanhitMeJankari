@@ -4,24 +4,67 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using System.Text;
+using RabbitMQ.Client;
+using System;
+using RabbitMQ.Client.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region Producer rabbit mq
+var factory = new ConnectionFactory() { HostName = "localhost" };//here hostname is your rabbit mq server 
+using var connection = factory.CreateConnection();
+using var channel = connection.CreateModel();
+{
+
+    //Producer
+    channel.QueueDeclare(queue: "hello", false, false, false, null);
+    string message = "this is producer";
+    var body=Encoding.UTF8.GetBytes(message);
+
+    channel.BasicPublish("", "hello", null, body);
+    Console.WriteLine(  "Messege publish {0}",message);
+  
+    //Consumer
+    channel.QueueDeclare(queue: "hello",
+                            durable: false,
+                            exclusive: false,
+                            autoDelete: false,
+                            arguments: null);
+   
+    var consumer = new EventingBasicConsumer(channel);
+    consumer.Received += (model, ea) =>
+    {
+        var body = ea.Body.ToArray();
+        var message = Encoding.UTF8.GetString(body);
+        Console.WriteLine(" [x] Received {0}", message);
+    };
+
+    channel.BasicConsume(queue: "hello",
+                         autoAck: true,
+                         consumer: consumer);
+
+    Console.WriteLine(" Press [enter] to exit.");
+    Console.ReadLine();
+
+}
+#endregion
+
+
 //Add Jwt Bearer authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    .AddJwtBearer(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = "MyIssuer",
-        ValidAudience = "MyAudience",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("yourSuperLongSecretKeyThatIsAtLeast32CharsLong"))
-    };
-});
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "MyIssuer",
+            ValidAudience = "MyAudience",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("yourSuperLongSecretKeyThatIsAtLeast32CharsLong"))
+        };
+    });
 
 //Add role base  authorization
 builder.Services.AddAuthorization(options =>

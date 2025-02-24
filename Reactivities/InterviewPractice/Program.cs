@@ -1,13 +1,28 @@
-﻿using InterviewPractice.PracticeQuestion.C_Concepts;
+﻿using InterviewPractice.PracticeQuestion.ArrayPractice;
+using InterviewPractice.PracticeQuestion.C_Concepts;
 using InterviewPractice.PracticeQuestion.Integer;
 using InterviewPractice.PracticeQuestion.LL;
 using InterviewPractice.PracticeQuestion.Patterns;
 using InterviewPractice.PracticeQuestion.QuickTest;
 using InterviewPractice.PracticeQuestion.String;
+#region Array
+ArrayPrograms.Convert2DarrayTo1DarrayPractice();
+ArrayPrograms.ReverseArray();
+ArrayPrograms.Find_the_Maximum_and_Minimum_in_Array();
+ArrayPrograms.Finding_SecondLargestElement_IN_Array();
+ArrayPrograms.Remove_Duplicates_FROM_Array();
+ArrayPrograms.BuySell_Stock_CalculateMaxProfit();
+#endregion
+
+MyDelegate del1=DelegateProgram.DisplayMessage;
+MyDelegate del2=DelegateProgram.DisplayMessage2;
+MyDelegate mainDel = del1 + del2;//Multicast delegate
+mainDel("hello multicast deligate");
+DelegateProgram.CheckBuilinDelegates();
+DelegateProgram.FindEvenNumberInIntArray();
+
 //Multiple task execution
 MultipleTask multipleTask = new MultipleTask();
-
- 
 var task1=Task.Run(()=>multipleTask.Mehtod1());
 var task2=Task.Run(()=>multipleTask.Mehtod2());
 await task1;
@@ -20,10 +35,6 @@ LinkedList myLinkedList = new LinkedList(4);
 //Print LL
 myLinkedList.Append(2);
 myLinkedList.PrintLL();
-
-#endregion
-
-#region Array
 
 #endregion
 
@@ -82,23 +93,17 @@ Pyramid.NumericTranglePyramid();
 
 #region String
 //Count duplicate in string 
-CountDuplicateInString.CountDuplicate("Proograaam is test");
+CountDuplicateInString.CountDuplicate();
 
 //Remove duplicate from string
-RemoveDuplicateFromString.RemoveDuplicate("Proograaam is test");
+RemoveDuplicateFromString.RemoveDuplicate();
 
 //Calculator<int> calculator = new Calculator<int>();
 //Console.WriteLine(calculator.Max(2, 5));
-
-
-
-StringPalindrom<string> aaa=new StringPalindrom<string>();
-string result = aaa.IsPalindrom("JAHAZ") == true ? "This is palindrom" : "this is not a palindrom";
-Console.WriteLine(result);
-IntegerPalindrom integerPalindrom = new IntegerPalindrom();
-
-string res = integerPalindrom.IsPalindrom(121)== true ? "This iteger is palindrom" : "this is not a palindrom";
-Console.WriteLine(res);
+ 
+StringPalindrom.IsStringPalindrom();
+StringPalindrom.IsIntegerPalindrom();
+ 
 #endregion
 
 Console.ReadKey();

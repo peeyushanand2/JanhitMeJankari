@@ -1,9 +1,10 @@
 ﻿namespace InterviewPractice.PracticeQuestion.String
 {
-    public static class CountDuplicateInString
+    public  class CountDuplicateInString
     {
-        public static void CountDuplicate(string input)
+        public static void CountDuplicate()
         {
+            string input = "Proograaam is test";
             IDictionary<char, int> dup = new Dictionary<char, int>();
             for (int i = 0; i < input.Length; i++)
             {

@@ -4,9 +4,10 @@ namespace InterviewPractice.PracticeQuestion.String
 {
     public static class RemoveDuplicateFromString
     {
-        public static void RemoveDuplicate(string input)
+        public static void RemoveDuplicate()
         {
-            StringBuilder result=new StringBuilder();
+            string input = "Proograaam is test";
+            StringBuilder result=new();
 
             for (int i = 0; i < input.Length; i++)
             {

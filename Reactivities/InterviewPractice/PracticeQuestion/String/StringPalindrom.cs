@@ -6,28 +6,25 @@ using System.Threading.Tasks;
 
 namespace InterviewPractice.PracticeQuestion.String
 {
-    internal class StringPalindrom<T>
+    internal class StringPalindrom
     {
-        //writing string palindrom JAHAJ
-      
-       
-        public bool IsPalindrom(string input)
-        { 
+         
+        public static void IsStringPalindrom()
+        {
+            string input = "JAHAZ";
             StringBuilder output = new StringBuilder();
             for (int i = input.Length; i > 0; i--)
             { 
             output.Append(input[i-1]);
             }
-
-            if(input.Equals(output.ToString()))return true;
-            return false;
+            
+            if(input.Equals(output.ToString())) 
+                Console.WriteLine("This is palindrom");
+            Console.WriteLine("this is not a palindrom");
         }
-    }
-
-    internal class IntegerPalindrom
-    {
-        public bool IsPalindrom(int input)
+        public static void IsIntegerPalindrom()
         {
+            int input = 121;
             int res = 0;
             int oldInput = input;
             //121
@@ -37,11 +34,12 @@ namespace InterviewPractice.PracticeQuestion.String
                 res = res * 10 + b;//1,12,120+1=121
                 input = input / 10;//121/10=12,12/10,1
             }
-            if(res.Equals(oldInput))
-            return true;
-            return false;
+            if (res.Equals(oldInput))
+                Console.WriteLine("This is palindrom");
+            Console.WriteLine("this is not a palindrom");
         }
-        }
+    }
+ 
     public class Calculator<T> where T : IComparable<T>
     {
         public T Max(T a,T b)
