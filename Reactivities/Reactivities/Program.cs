@@ -7,46 +7,47 @@ using System.Text;
 using RabbitMQ.Client;
 using System;
 using RabbitMQ.Client.Events;
+using API.CustomMiddeware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 #region Producer rabbit mq
-var factory = new ConnectionFactory() { HostName = "localhost" };//here hostname is your rabbit mq server 
-using var connection = factory.CreateConnection();
-using var channel = connection.CreateModel();
-{
+//var factory = new ConnectionFactory() { HostName = "localhost" };//here hostname is your rabbit mq server 
+//using var connection = factory.CreateConnection();
+//using var channel = connection.CreateModel();
+//{
 
-    //Producer
-    channel.QueueDeclare(queue: "hello", false, false, false, null);
-    string message = "this is producer";
-    var body=Encoding.UTF8.GetBytes(message);
+//    //Producer
+//    channel.QueueDeclare(queue: "hello", false, false, false, null);
+//    string message = "this is producer";
+//    var body=Encoding.UTF8.GetBytes(message);
 
-    channel.BasicPublish("", "hello", null, body);
-    Console.WriteLine(  "Messege publish {0}",message);
+//    channel.BasicPublish("", "hello", null, body);
+//    Console.WriteLine(  "Messege publish {0}",message);
   
-    //Consumer
-    channel.QueueDeclare(queue: "hello",
-                            durable: false,
-                            exclusive: false,
-                            autoDelete: false,
-                            arguments: null);
+//    //Consumer
+//    channel.QueueDeclare(queue: "hello",
+//                            durable: false,
+//                            exclusive: false,
+//                            autoDelete: false,
+//                            arguments: null);
    
-    var consumer = new EventingBasicConsumer(channel);
-    consumer.Received += (model, ea) =>
-    {
-        var body = ea.Body.ToArray();
-        var message = Encoding.UTF8.GetString(body);
-        Console.WriteLine(" [x] Received {0}", message);
-    };
+//    var consumer = new EventingBasicConsumer(channel);
+//    consumer.Received += (model, ea) =>
+//    {
+//        var body = ea.Body.ToArray();
+//        var message = Encoding.UTF8.GetString(body);
+//        Console.WriteLine(" [x] Received {0}", message);
+//    };
 
-    channel.BasicConsume(queue: "hello",
-                         autoAck: true,
-                         consumer: consumer);
+//    channel.BasicConsume(queue: "hello",
+//                         autoAck: true,
+//                         consumer: consumer);
 
-    Console.WriteLine(" Press [enter] to exit.");
-    Console.ReadLine();
+//    Console.WriteLine(" Press [enter] to exit.");
+//    Console.ReadLine();
 
-}
+//}
 #endregion
 
 
@@ -54,13 +55,16 @@ using var channel = connection.CreateModel();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+       // options.Audience = "";
+      //  options.Authority
+
         options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "MyIssuer",
+            ValidIssuer = "MyIssuerURL",
             ValidAudience = "MyAudience",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("yourSuperLongSecretKeyThatIsAtLeast32CharsLong"))
         };
@@ -125,10 +129,9 @@ if (app.Environment.IsDevelopment())
     });
 }
 app.UseHttpsRedirection();
-
+app.UseMiddleware<LoggerMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 using var scope = app.Services.CreateScope();

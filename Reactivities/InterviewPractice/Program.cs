@@ -5,6 +5,7 @@ using InterviewPractice.PracticeQuestion.LL;
 using InterviewPractice.PracticeQuestion.Patterns;
 using InterviewPractice.PracticeQuestion.QuickTest;
 using InterviewPractice.PracticeQuestion.String;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 #region Array
 ArrayPrograms.Convert2DarrayTo1DarrayPractice();
 ArrayPrograms.ReverseArray();
@@ -39,11 +40,25 @@ myLinkedList.PrintLL();
 #endregion
 
 #region C#Concepts
+
+//Call by Value
+int number = 10;
+Console.WriteLine($"Before Method Call: number = {number}");
+CallByValue.Increment(number);
+Console.WriteLine($"After Method Call: number = {number}");
+
+//Call by Reference
+int number2 = 10;
+Console.WriteLine($"Before Method Call: number = {number2}");
+CallByReference.Increment(ref number2);
+Console.WriteLine($"After Method Call: number = {number2}");
+
+
 //Without LSP
 Oranges orange = new Oranges();
 orange.Color();
 //even apple reference variable hoding the child object
-//and its vilation of LSPP
+//and its voilation of LSPP
 Apples apples = new Oranges();
 apples.Color();
 
