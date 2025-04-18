@@ -29,7 +29,7 @@ namespace InterviewPractice.PracticeQuestion.C_Concepts
     {
         public static void Increment(ref int num)
         {
-            num++; // This change will not affect the original variable
+            num++; // This change will affect the original variable
             Console.WriteLine($"Inside Method: num = {num}");
         }
 

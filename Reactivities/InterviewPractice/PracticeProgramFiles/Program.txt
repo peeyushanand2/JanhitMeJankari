@@ -1,22 +1,13 @@
 1- 1 to 100 - find the missing number
 2- count duplicate
 
-
-
-
-1. Implement a thread-safe singleton class in C# using double-check locking.
-
-
 2. Write a logic to convert one dimensional array to a two-dimensional array?
 
 Input {1,2,3,4,5,6}
 
 Output:
-
 123
-
 456
-
 
 3. Find the Minimum in a Rotated Sorted Array
 
@@ -26,4 +17,4 @@ Input: [3, 4, 5, 1, 2]
 
 Output: 1
 
-4.Create a thread-safe Singleton class in C# that ensures only one instance of the class is created and provides global access to that instance.
+4- int[] arr=[1,7,90,33,67,56,20,39,10,30] find max  number from given index 1,2,3 like that foe any iindex user input C#

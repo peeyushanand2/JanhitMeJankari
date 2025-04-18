@@ -1,53 +1,63 @@
+using API.CustomMiddeware;
+using API.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Persistence;
-using System.Text;
 using RabbitMQ.Client;
-using System;
 using RabbitMQ.Client.Events;
-using API.CustomMiddeware;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 #region Producer rabbit mq
-//var factory = new ConnectionFactory() { HostName = "localhost" };//here hostname is your rabbit mq server 
-//using var connection = factory.CreateConnection();
-//using var channel = connection.CreateModel();
-//{
+ 
+var factory = new ConnectionFactory() { 
+    HostName = "localhost",
+    Port = 5672,
+    UserName = "guest",
+    Password = "guest"
+};//here hostname is your rabbit mq server 
+using var connection = factory.CreateConnection();
+using var channel = connection.CreateModel();
+{
 
-//    //Producer
-//    channel.QueueDeclare(queue: "hello", false, false, false, null);
-//    string message = "this is producer";
-//    var body=Encoding.UTF8.GetBytes(message);
-
-//    channel.BasicPublish("", "hello", null, body);
-//    Console.WriteLine(  "Messege publish {0}",message);
-  
-//    //Consumer
-//    channel.QueueDeclare(queue: "hello",
-//                            durable: false,
-//                            exclusive: false,
-//                            autoDelete: false,
-//                            arguments: null);
+    //Producer
+    channel.QueueDeclare(queue: "hello", true, false, false, null);
+    var player = new Player { Id=1,Name="Test", Level=2 };
+   // string message = "this is producer";
    
-//    var consumer = new EventingBasicConsumer(channel);
-//    consumer.Received += (model, ea) =>
-//    {
-//        var body = ea.Body.ToArray();
-//        var message = Encoding.UTF8.GetString(body);
-//        Console.WriteLine(" [x] Received {0}", message);
-//    };
+    var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(player));
 
-//    channel.BasicConsume(queue: "hello",
-//                         autoAck: true,
-//                         consumer: consumer);
+    channel.BasicPublish("", "hello", null, body);
+  //  Console.WriteLine("Messege publish {0}", message);
 
-//    Console.WriteLine(" Press [enter] to exit.");
-//    Console.ReadLine();
 
-//}
+    //Consumer
+    channel.QueueDeclare(queue: "hello",
+                        durable: true,
+                        exclusive: false,
+                        autoDelete: false,
+                        arguments: null);
+
+    var consumer = new EventingBasicConsumer(channel);
+    consumer.Received += (model, ea) =>
+    {
+        var body = ea.Body.ToArray();
+        var message = Encoding.UTF8.GetString(body);
+        var plr = JsonConvert.DeserializeObject<Player>(message);
+        Console.WriteLine(" [x] Received {0}{1},{2}", plr.Id,plr.Name,plr.Level);
+    };
+
+    channel.BasicConsume(queue: "hello",
+                         autoAck: true,
+                         consumer: consumer);
+
+    Console.WriteLine(" Press [enter] to exit.");
+    Console.ReadLine();
+}
 #endregion
 
 
@@ -147,6 +157,5 @@ catch (Exception ex)
     var logger = services.GetRequiredService<ILogger<Program>>();
     logger.LogError(ex, "An error occured while migration");
 }
-
 
 app.Run();

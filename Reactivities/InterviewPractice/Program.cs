@@ -5,8 +5,42 @@ using InterviewPractice.PracticeQuestion.LL;
 using InterviewPractice.PracticeQuestion.Patterns;
 using InterviewPractice.PracticeQuestion.QuickTest;
 using InterviewPractice.PracticeQuestion.String;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
+
+string[] inputArray = [
+            "Appy",
+            "AppyFizz",
+            "AppyFizzFizzAppy",
+            "AppyFizzFizzFizz",
+            "FizzAppyFizz"
+       ];
+
+string[] outputArray = new string[inputArray.Length];
+
+for (int i = 0; i < inputArray.Length; i++)
+{
+    outputArray[i]= RemoveFirstFizz(inputArray[i]);
+}
+
+// Print the output
+foreach (var item in outputArray)
+{
+    Console.WriteLine(item);
+}
+    static string RemoveFirstFizz(string input)
+{
+    int index = input.IndexOf("Fizz");
+    if (index >= 0)
+    {
+        return input.Remove(index, "Fizz".Length);
+    }
+    return input;
+}
+
+
+
 #region Array
+LinqExamples.Multiply2atOddNumber();
 ArrayPrograms.Convert2DarrayTo1DarrayPractice();
 ArrayPrograms.ReverseArray();
 ArrayPrograms.Find_the_Maximum_and_Minimum_in_Array();

@@ -20,6 +20,8 @@ namespace InterviewPractice.PracticeQuestion.C_Concepts
     {
         void I1.Add()
         {
+            var dd = Singleton.GetSingleton();
+            dd.Log();
             Console.WriteLine("Add I1 method in class A");
         }
         void I2.Add()
@@ -27,4 +29,5 @@ namespace InterviewPractice.PracticeQuestion.C_Concepts
             Console.WriteLine("Add I2 method in class A");
         }
     }
+  
 }

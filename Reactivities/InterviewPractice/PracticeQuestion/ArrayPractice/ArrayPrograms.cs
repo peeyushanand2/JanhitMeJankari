@@ -106,6 +106,7 @@ namespace InterviewPractice.PracticeQuestion.ArrayPractice
             Console.WriteLine(string.Join(",", res.ToArray()));
         }
         public static void BuySell_Stock_CalculateMaxProfit()
+
         {
             int[] prices = { 3, 5, 1, 8,7, 10, 4 };
             // Solution1 : brute force

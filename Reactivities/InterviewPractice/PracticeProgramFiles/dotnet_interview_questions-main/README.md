@@ -75,15 +75,23 @@ For more content like this be sure to join 15,500+ engineers to my [TheCodeMan.n
 
 ### 1. What is .NET?
 
-**Answer:** .NET is a comprehensive development platform used for building a wide variety of applications, including web, mobile, desktop, and gaming. It supports multiple programming languages, such as C#, F#, and Visual Basic. .NET provides a large class library called Framework Class Library (FCL) and runs on a Common Language Runtime (CLR) which offers services like memory management, security, and exception handling.
+**Answer:** .NET is a comprehensive development platform used for building a wide variety of applications, including web, mobile, desktop, and gaming. 
+It supports multiple programming languages, such as C#, F#, and Visual Basic. .NET provides a large class library called Framework Class Library (FCL) 
+and runs on a Common Language Runtime (CLR) which offers services like memory management, security, and exception handling.
 
 ### 2. Can you explain the Common Language Runtime (CLR)?
 
-**Answer:** The CLR is a virtual machine component of the .NET framework that manages the execution of .NET programs. It provides important services such as memory management, type safety, exception handling, garbage collection, and thread management. The CLR converts Intermediate Language (IL) code into native machine code through a process called Just-In-Time (JIT) compilation. This ensures that .NET applications can run on any device or platform that supports the .NET framework.
+**Answer:** The CLR is a virtual machine component of the .NET framework that manages the execution of .NET programs.
+It provides important services such as memory management, type safety, exception handling, garbage collection, and thread management.
+The CLR converts Intermediate Language (IL) code into native machine code through a process called Just-In-Time (JIT) compilation.
+This ensures that .NET applications can run on any device or platform that supports the .NET framework.
 
 ### 3. What is the difference between managed and unmanaged code?
 
-**Answer:** Managed code is executed by the CLR, which provides services like garbage collection, exception handling, and type checking. It's called "managed" because the CLR manages a lot of the functionalities that developers would otherwise need to implement themselves. Unmanaged code, on the other hand, is executed directly by the operating system, and all memory allocation, type safety, and security must be handled by the programmer. Examples of unmanaged code include applications written in C or C++.
+**Answer:** Managed code is executed by the CLR, which provides services like garbage collection, exception handling, and type checking.
+It's called "managed" because the CLR manages a lot of the functionalities that developers would otherwise need to implement themselves.
+Unmanaged code, on the other hand, is executed directly by the operating system, and all memory allocation, type safety, and security must be handled by the programmer. 
+Examples of unmanaged code include applications written in C or C++.
 
 ### 4. Explain the basic structure of a C# program.
 
@@ -111,11 +119,16 @@ namespace HelloWorld
 
 ### 5. What are Value Types and Reference Types in C#?
 
-**Answer:** In C#, data types are divided into two categories: Value Types and Reference Types. This distinction affects how values are stored and manipulated within memory.
+**Answer:** In C#, data types are divided into two categories: Value Types and Reference Types. 
+This distinction affects how values are stored and manipulated within memory.
 
-- **Value Types:** Store data directly and are allocated on the stack. This means that when you assign one value type to another, a direct copy of the value is created. Basic data types (`int`, `double`, `bool`, etc.) and structs are examples of value types. Operations on value types are generally faster due to stack allocation.
+- **Value Types:** Store data directly and are allocated on the stack. 
+- This means that when you assign one value type to another, a direct copy of the value is created. Basic data types (`int`, `double`, `bool`, etc.)
+- and structs are examples of value types. Operations on value types are generally faster due to stack allocation.
 
-- **Reference Types:** Store a reference (or pointer) to the actual data, which is allocated on the heap. When you assign one reference type to another, both refer to the same object in memory; changes made through one reference are reflected in the other. Classes, arrays, delegates, and strings are examples of reference types.
+- **Reference Types:** Store a reference (or pointer) to the actual data, which is allocated on the heap.
+- When you assign one reference type to another, both refer to the same object in memory; changes made through one reference are reflected in the other. 
+- Classes, arrays, delegates, and strings are examples of reference types.
 
 Here's a simple example to illustrate the difference:
 
@@ -135,15 +148,24 @@ Console.WriteLine(list1.Count); // Output: 4
 Console.WriteLine(list2.Count); // Output: 4
 ```
 
-In the value type example, changing b does not affect a because b is a separate copy. In the reference type example, list2 is not a separate copy; it's another reference to the same list object as list1, so changes made through list2 are visible when accessing list1.
+In the value type example, changing b does not affect a because b is a separate copy. 
+In the reference type example, list2 is not a separate copy;
+it's another reference to the same list object as list1, so changes made through list2 are visible when accessing list1.
 
 ### 6. What is garbage collection in .NET?
 
-**Answer:** Garbage collection (GC) in .NET is an automatic memory management feature that frees up memory used by objects that are no longer accessible in the program. It eliminates the need for developers to manually release memory, thereby reducing memory leaks and other memory-related errors. The GC operates on a separate thread and works in three phases: marking, relocating, and compacting. During the marking phase, it identifies which objects in the heap are still in use. During the relocating phase, it updates the references to objects that will be compacted. Finally, during the compacting phase, it reclaims the space occupied by the garbage objects and compacts the remaining objects to make memory allocation more efficient.
+**Answer:** Garbage collection (GC) in .NET is an automatic memory management feature that frees up memory used by objects that are no longer accessible in the program. 
+It eliminates the need for developers to manually release memory, thereby reducing memory leaks and other memory-related errors.
+The GC operates on a separate thread and works in three phases: marking, relocating, and compacting. 
+During the marking phase, it identifies which objects in the heap are still in use.
+During the relocating phase, it updates the references to objects that will be compacted.
+Finally, during the compacting phase, it reclaims the space occupied by the garbage objects and compacts the remaining objects to make memory allocation more efficient.
 
 ### 7. Explain the concept of exception handling in C#.
 
-**Answer:** Exception handling in C# is a mechanism to handle runtime errors, allowing a program to continue running or fail gracefully instead of crashing. It is done using the try, catch, and finally blocks. The try block contains code that might throw an exception, while catch blocks are used to handle the exception. The finally block contains code that is executed whether an exception is thrown or not, often for cleanup purposes.
+**Answer:** Exception handling in C# is a mechanism to handle runtime errors, allowing a program to continue running or fail gracefully instead of crashing.
+It is done using the try, catch, and finally blocks. The try block contains code that might throw an exception, while catch blocks are used to handle the exception. 
+The finally block contains code that is executed whether an exception is thrown or not, often for cleanup purposes.
 
 ```csharp
 try {
@@ -195,9 +217,13 @@ In this example, the System namespace is used to access the Console class, and M
 
 ### 10. What is encapsulation?
 
-**Answer:** Encapsulation is a fundamental principle of object-oriented programming (OOP) that involves bundling the data (attributes) and methods (operations) that operate on the data into a single unit, or class, and restricting access to the internals of that class. This is typically achieved through the use of access modifiers such as `private`, `public`, `protected`, and `internal`. Encapsulation helps to protect an object's internal state from unauthorized access and modification by external code, promoting data integrity and security.
+**Answer:** Encapsulation is a fundamental principle of object-oriented programming (OOP) that involves bundling the data (attributes) and methods (operations) 
+that operate on the data into a single unit, or class, and restricting access to the internals of that class. 
+This is typically achieved through the use of access modifiers such as `private`, `public`, `protected`, and `internal`.
+Encapsulation helps to protect an object's internal state from unauthorized access and modification by external code, promoting data integrity and security.
 
-Encapsulation allows the internal representation of an object to be hidden from the outside, only allowing access through a public interface. This concept is also known as data hiding. By controlling how data is accessed and modified, encapsulation helps to reduce complexity and increase reusability of code.
+Encapsulation allows the internal representation of an object to be hidden from the outside, only allowing access through a public interface.
+This concept is also known as data hiding. By controlling how data is accessed and modified, encapsulation helps to reduce complexity and increase reusability of code.
 
 Here is a simple example demonstrating encapsulation in C#:
 
@@ -228,15 +254,24 @@ class Program
 }
 ```
 
-In this example, the name field of the Person class is encapsulated and only accessible via the Name property. This approach allows the Person class to control how the name field is accessed and modified, ensuring that any rules or validations about the data can be applied within the class itself.
+In this example, the name field of the Person class is encapsulated and only accessible via the Name property. 
+This approach allows the Person class to control how the name field is accessed and modified, ensuring that any rules 
+or validations about the data can be applied within the class itself.
 
 ### 11. Explain polymorphism and its types in C#.
 
-**Answer:** Polymorphism is a core concept in object-oriented programming (OOP) that allows objects to be treated as instances of their parent class rather than their actual derived class. This enables methods to perform different tasks based on the object that invokes them, enhancing flexibility and enabling code reusability. In C#, polymorphism can be implemented in two ways: static (compile-time) polymorphism and dynamic (runtime) polymorphism.
+**Answer:** Polymorphism is a core concept in object-oriented programming (OOP) 
+that allows objects to be treated as instances of their parent class rather than their actual derived class.
+This enables methods to perform different tasks based on the object that invokes them, enhancing flexibility and enabling code reusability.
+In C#, polymorphism can be implemented in two ways: static (compile-time) polymorphism and dynamic (runtime) polymorphism.
 
-- **Static Polymorphism:** Achieved through method overloading and operator overloading. It allows multiple methods or operators with the same name but different parameters to coexist, with the specific method or operator being invoked determined at compile time based on the arguments passed.
+- **Static Polymorphism:** Achieved through method overloading and operator overloading. 
+- It allows multiple methods or operators with the same name but different parameters to coexist, 
+- with the specific method or operator being invoked determined at compile time based on the arguments passed.
 
-- **Dynamic Polymorphism:** Achieved through method overriding. It allows a method in a derived class to have the same name and signature as a method in its base class, but with different implementation details. The method that gets executed is determined at runtime, depending on the type of the object.
+- **Dynamic Polymorphism:** Achieved through method overriding. 
+- It allows a method in a derived class to have the same name and signature as a method in its base class,
+- but with different implementation details. The method that gets executed is determined at runtime, depending on the type of the object.
 
 Here's an example demonstrating both types of polymorphism in C#:
 
@@ -292,11 +327,17 @@ class Program
 }
 ```
 
-In the example above, the Calculator class demonstrates static polymorphism through method overloading, allowing the Add method to be called with different numbers of parameters. The Animal and Dog classes illustrate dynamic polymorphism, where the Speak method in the Dog class overrides the Speak method in its base class, Animal. The type of polymorphism used depends on the object reference at runtime, showcasing polymorphism's flexibility in OOP.
+In the example above, the Calculator class demonstrates static polymorphism through method overloading, 
+allowing the Add method to be called with different numbers of parameters. 
+The Animal and Dog classes illustrate dynamic polymorphism, where the Speak method in the Dog class overrides the Speak method in its base class, Animal. 
+The type of polymorphism used depends on the object reference at runtime, showcasing polymorphism's flexibility in OOP.
 
 ### 12. What are delegates and how are they used in C#?
 
-**Answer:** Delegates in C# are type-safe function pointers or references to methods with a specific parameter list and return type. They allow methods to be passed as parameters, stored in variables, and returned by other methods, which enables flexible and extensible programming designs such as event handling and callback methods. Delegates are particularly useful in implementing the observer pattern and designing frameworks or components that need to notify other objects about events or changes without knowing the specifics of those objects.
+**Answer:** Delegates in C# are type-safe function pointers or references to methods with a specific parameter list and return type. 
+They allow methods to be passed as parameters, stored in variables, and returned by other methods, which enables flexible and extensible programming designs
+such as event handling and callback methods. Delegates are particularly useful in implementing the observer pattern and designing frameworks or components 
+that need to notify other objects about events or changes without knowing the specifics of those objects.
 
 There are three main types of delegates in C#:
 - **Single-cast delegates:** Point to a single method at a time.
