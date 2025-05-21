@@ -25,15 +25,15 @@ namespace InterviewPractice.PracticeQuestion.C_Concepts
         public static void CheckBuilinDelegates()
         {
             //Action
-            Action<string> actions = message => Console.WriteLine(message);
-            actions("hello");
+            Action<string,string> actions = (message,meesage1) => Console.WriteLine(message+meesage1);
+            actions("hello","Peeyush");
             
             //Func 
             Func<int, int, int> add = (x,y)=>x+y;
             int s= add(4,5);
             Console.WriteLine( "func delegate:{0}",s);
-
-            //Predicate
+       
+            //PredicateIQueryable
             Predicate<int> predicate = s=>s%2==0;
             bool res= predicate(2);
             Console.WriteLine("Predicate:{0}",res);

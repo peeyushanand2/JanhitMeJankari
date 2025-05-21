@@ -1,6 +1,11 @@
 ﻿using Application;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using NuGet.Protocol;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace API.Controllers
 {
@@ -17,6 +22,9 @@ namespace API.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] UserModel user)
         {
+
+          
+            
             if (user.UserName == "admin" && user.Password == "password")
             {
                 user.Role = "Admin";
@@ -33,5 +41,6 @@ namespace API.Controllers
 
             return Unauthorized();
         }
+        
     }
 }

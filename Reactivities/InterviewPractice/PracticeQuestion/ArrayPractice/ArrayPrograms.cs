@@ -13,7 +13,7 @@ namespace InterviewPractice.PracticeQuestion.ArrayPractice
         {
             //converting 2d array to 1d array  
             //Solution1
-            int[,] ints2 = { { 1, 2, 3 }, { 2, 3, 5 } };
+            int[,] ints2 = { { 1, 2, 3 }, { 2, 3, 5 },{ 3,5,7} };
 
             int rr = ints2.GetLength(0);
             int cc = ints2.GetLength(1);
@@ -44,9 +44,9 @@ namespace InterviewPractice.PracticeQuestion.ArrayPractice
             // Array.Reverse(input);
             // Console.WriteLine(string.Join(",",input));
             int indx = 0;
-            for (int i = input.Length; i > 0; i--)
+            for (int i = input.Length-1; i >= 0; i--)
             {
-                res[indx++] = input[i - 1];
+                res[indx++] = input[i];
             }
             Console.WriteLine("ReverseArray: {0}", string.Join(",", res));
         }
@@ -111,7 +111,7 @@ namespace InterviewPractice.PracticeQuestion.ArrayPractice
             int[] prices = { 3, 5, 1, 8,7, 10, 4 };
             // Solution1 : brute force
             int maxProfit = 0;
-            for (int i = 0; i < prices.Length-1; i++)
+            for (int i = 0; i <= prices.Length; i++)
             {
                 for (int j = i + 1; j < prices.Length; j++)
                 { 
@@ -127,7 +127,7 @@ namespace InterviewPractice.PracticeQuestion.ArrayPractice
             // Solution2 :
             int minprice = int.MaxValue;
             int maxPrft = 0;
-            for (int i = 0; i < prices.Length - 1; i++)
+            for (int i = 0; i < prices.Length; i++)
             {
                 if (prices[i] < minprice)
                 { 

@@ -1,5 +1,6 @@
 using API.CustomMiddeware;
 using API.Models;
+using Application;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -12,8 +13,12 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<IPaymentProcessor, PaymentProcessor>();
+builder.Services.AddScoped<IPaymentProcessor, PaymentChecker>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+
 #region Producer rabbit mq
- 
+
 var factory = new ConnectionFactory() { 
     HostName = "localhost",
     Port = 5672,
@@ -74,7 +79,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "MyIssuerURL",
+            ValidIssuer = "MyIssuer",
             ValidAudience = "MyAudience",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("yourSuperLongSecretKeyThatIsAtLeast32CharsLong"))
         };

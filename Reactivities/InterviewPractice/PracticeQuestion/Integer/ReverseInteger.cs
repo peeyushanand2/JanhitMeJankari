@@ -2,9 +2,10 @@
 {
     public static class ReverseInteger
     {
-        public static int Reverse(int x)//123
+        public static int Reverse() 
         {
             //check if its negative number
+            int x = 123;
             bool IsNegative = x < 0;
             if (IsNegative)
             {
@@ -21,8 +22,9 @@
             return IsNegative ? -newNumber : newNumber;
 
         }
-        public static int ReverseUsingStack(int x)
+        public static int ReverseUsingStack()
         {
+            int x = -123;
             bool IsNegative = x < 0;
             if (IsNegative) { x = -x; }
 

@@ -5,7 +5,67 @@ using InterviewPractice.PracticeQuestion.LL;
 using InterviewPractice.PracticeQuestion.Patterns;
 using InterviewPractice.PracticeQuestion.QuickTest;
 using InterviewPractice.PracticeQuestion.String;
+using System.Text;
 
+
+
+//generate result from called function
+int resultt = await GetDataAsync();
+Console.WriteLine(resultt);
+
+static async Task<int> GetDataAsync()
+{
+    //task awaits
+    await Task.Delay(1000);
+    return 42;
+}
+long res=Factorial.CalculateFactorial(5);
+Console.WriteLine(res);
+
+
+Func<int, int, int> func = (x, y) => x + y;
+Action<string> act=message=> Console.WriteLine($"Hello {message} ");
+var result = func(2, 3);
+string inputt = "This is my Plate";
+ //Linq
+ var resss=inputt 
+            .Split(' ')
+            .Select(inp=>new string(inp.Reverse().ToArray())).ToList();
+//query
+var rrr=from inp in inputt.Split(' ')
+        where inp.Length > 0
+        select new string(inp.Reverse().ToArray());
+ 
+static string ReverseWord(string word)
+{
+    if (word.Length <= 1)
+        return word;
+
+    return ReverseWord(word.Substring(1)) + word[0];
+}
+string input = "This is my Plate";
+
+//Solution2
+string[] arr = input.Split(' ');
+StringBuilder ff = new();
+for (int i = 0; i < arr.Length; i++)
+{
+    
+    ff.Append(Reverse(arr[i].ToString()));
+    ff.Append(' ');
+
+}
+Console.WriteLine("Result:{0}", string.Join(' ', ff.ToString()));
+static string Reverse(string innput)
+{
+    StringBuilder bldr = new();
+    for (int i = innput.Length - 1; i >= 0; i--)
+    {
+        bldr.Append(innput[i]);
+    }
+    return bldr.ToString();
+}
+ 
 
 string[] inputArray = [
             "Appy",
@@ -40,6 +100,7 @@ foreach (var item in outputArray)
 
 
 #region Array
+LinqExamples.FindKthElemetInUnSortedArrar();
 LinqExamples.Multiply2atOddNumber();
 ArrayPrograms.Convert2DarrayTo1DarrayPractice();
 ArrayPrograms.ReverseArray();
@@ -96,6 +157,9 @@ orange.Color();
 Apples apples = new Oranges();
 apples.Color();
 
+Apples ddas = new Apples();
+ddas.Color();
+
 // LSP
 //here fruilt base class object reference variable can be replaced with Orange class 
 //and Apple class
@@ -124,14 +188,14 @@ i2.Add();
 
 #region Integer
 //reverse integer
-int input = 123;
-int x = ReverseInteger.Reverse(input);
-Console.WriteLine($"Reverse of {input} is {x}");
+
+int x = ReverseInteger.Reverse();
+Console.WriteLine($"Reverse of  is {x}");
 
 //reverse integer using Stack;
-int inputstack = -123;
-int xStack = ReverseInteger.ReverseUsingStack(inputstack);
-Console.WriteLine($"Reverse of {input} is {xStack}");
+
+int xStack = ReverseInteger.ReverseUsingStack();
+Console.WriteLine($"Reverse of  is {xStack}");
 #endregion
 
 #region Patterns

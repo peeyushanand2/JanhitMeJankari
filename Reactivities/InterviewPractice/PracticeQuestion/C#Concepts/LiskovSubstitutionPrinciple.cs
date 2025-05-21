@@ -5,7 +5,7 @@
     {
         public virtual void Color()
         {
-            Console.WriteLine("Red");
+            Console.WriteLine("Apple");
         }
     }
     public class Oranges : Apples

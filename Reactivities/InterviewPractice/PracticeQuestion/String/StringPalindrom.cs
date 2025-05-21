@@ -8,17 +8,31 @@ namespace InterviewPractice.PracticeQuestion.String
 {
     internal class StringPalindrom
     {
-         
+
         public static void IsStringPalindrom()
         {
-            string input = "JAHAZ";
-            StringBuilder output = new StringBuilder();
-            for (int i = input.Length; i > 0; i--)
+            var res = "Raajiv".RemoveDuplicate();
+            Console.WriteLine(res);
+
+            string input = "JAH AJ";
+            int lenth = input.Length;
+            for ( int i =0;i<input.Length; i++)
             { 
-            output.Append(input[i-1]);
+                if (input[i] != input[lenth - 1 - i])
+                {
+                    Console.WriteLine("this is not a palindrom");
+                     
+                }
             }
-            
-            if(input.Equals(output.ToString())) 
+
+            //Solution1
+            string output = string.Empty;
+            for (int i = input.Length; i > 0; i--)
+            {
+                output+=input[i - 1];
+            }
+
+            if (input.Equals(output.ToString()))
                 Console.WriteLine("This is palindrom");
             Console.WriteLine("this is not a palindrom");
         }
@@ -39,14 +53,29 @@ namespace InterviewPractice.PracticeQuestion.String
             Console.WriteLine("this is not a palindrom");
         }
     }
- 
-    public class Calculator<T> where T : IComparable<T>
+
+    public static class StringExtension
     {
-        public T Max(T a,T b)
+        public static string RemoveDuplicate(this string input)
         {
-            return a.CompareTo(b) > 0 ? a : b ;
+            string response = string.Empty;
+            foreach (char c in input)
+                if (!(response.IndexOf(c) != -1))
+                {
+                    response += c;
+
+                }
+            return response;
 
         }
-    }
+        public class Calculator<T> where T : IComparable<T>
+        {
+            public T Max(T a, T b)
+            {
+                return a.CompareTo(b) > 0 ? a : b;
+
+            }
+        }
 
     }
+}
